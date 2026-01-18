@@ -1,0 +1,29 @@
+:root {
+  /* Tema Claro */
+  --cor-primaria: #1DB954;
+  --cor-secundaria: #191414;
+  --cor-fundo: #FFFFFF;
+  --cor-fundo-secundaria: #F7F7F7;
+  --cor-texto: #191414;
+  --cor-texto-secundaria: #6A6A6A;
+  --cor-borda: #E0E0E0;
+  --cor-hover: #1ed760;
+  --transicao: 0.3s ease;
+}
+
+[data-tema="escuro"] {
+  /* Tema Escuro */
+  --cor-primaria: #1DB954;
+  --cor-secundaria: #191414;
+  --cor-fundo: #121212;
+  --cor-fundo-secundaria: #282828;
+  --cor-texto: #FFFFFF;
+  --cor-texto-secundaria: #B3B3B3;
+  --cor-borda: #404040;
+  --cor-hover: #1ed760;
+  --transicao: 0.3s ease;
+}
+
+* {
+  transition: background-color var(--transicao), color var(--transicao), border-color var(--transicao);
+}
