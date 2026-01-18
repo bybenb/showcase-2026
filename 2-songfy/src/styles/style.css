@@ -68,33 +68,297 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 200px;
+  width: 280px;
   background-color: var(--cor-fundo-secundaria);
   border-radius: 8px;
   padding: 1.5rem;
   height: fit-content;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
 }
 
-.sidebar-item {
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--cor-borda);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--cor-texto-secundaria);
+}
+
+/* Perfil do Usuário */
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--cor-fundo);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-usuario {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cor-primaria);
+}
+
+.info-usuario {
+  flex: 1;
+}
+
+.nome-usuario {
+  margin: 0;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.status-online {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cor-texto-secundaria);
+  font-size: 0.85rem;
+}
+
+.indicador-online {
+  width: 8px;
+  height: 8px;
+  background-color: #31A24C;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Divisor */
+.divisor-sidebar {
+  border: none;
+  border-top: 1px solid var(--cor-borda);
+  margin: 1.5rem 0;
+}
+
+/* Navegação Principal */
+.navegacao-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.item-nav {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 6px;
-  cursor: pointer;
   color: var(--cor-texto);
   text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transicao);
+  font-size: 0.95rem;
 }
 
-.sidebar-item:hover {
+.item-nav:hover {
   background-color: var(--cor-borda);
   color: var(--cor-primaria);
 }
 
-.sidebar-item i {
-  font-size: 1.2rem;
-  width: 1.5rem;
+.item-nav.ativo {
+  background-color: var(--cor-primaria);
+  color: white;
+  font-weight: 600;
+}
+
+.item-nav i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Busca Rápida */
+.busca-rapida {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-busca {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: 0.9rem;
+  transition: all var(--transicao);
+}
+
+.input-busca:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.1);
+}
+
+.input-busca::placeholder {
+  color: var(--cor-texto-secundaria);
+}
+
+.icone-busca {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cor-texto-secundaria);
+  pointer-events: none;
+}
+
+/* Playlists */
+.secao-playlists {
+  margin-bottom: 1.5rem;
+}
+
+.botao-expandir-playlists {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  background: none;
+  border: none;
+  color: var(--cor-texto);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all var(--transicao);
+}
+
+.botao-expandir-playlists:hover {
+  color: var(--cor-primaria);
+}
+
+.botao-expandir-playlists i {
+  transition: transform var(--transicao);
+}
+
+.botao-expandir-playlists.colapsado i {
+  transform: rotate(-90deg);
+}
+
+.lista-playlists {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1rem 0;
+}
+
+.item-playlist {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 4px;
+  color: var(--cor-texto);
+  cursor: pointer;
+  transition: all var(--transicao);
+  font-size: 0.9rem;
+}
+
+.item-playlist:hover {
+  background-color: var(--cor-borda);
+  color: var(--cor-primaria);
+}
+
+.item-playlist i {
+  width: 18px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.contador-playlist {
+  margin-left: auto;
+  background-color: var(--cor-borda);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: var(--cor-texto-secundaria);
+}
+
+.botao-nova-playlist {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transicao);
+}
+
+.botao-nova-playlist:hover {
+  background-color: var(--cor-hover);
+}
+
+/* Amigos Online */
+.secao-amigos {
+  margin-bottom: 1.5rem;
+}
+
+.titulo-amigos {
+  margin: 0 0 1rem 0;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.lista-amigos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.amigo-online {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transicao);
+}
+
+.amigo-online:hover {
+  transform: scale(1.1);
+}
+
+.avatar-amigo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--cor-primaria);
+}
+
+.amigo-online::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #31A24C;
+  border-radius: 50%;
+  border: 2px solid var(--cor-fundo-secundaria);
 }
 
 /* Conteúdo principal */
@@ -248,38 +512,39 @@ body {
 }
 
 /* Responsivo */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
 @media (max-width: 768px) {
   .container-principal {
     flex-direction: column;
-    padding: 1rem;
   }
 
   .sidebar {
     width: 100%;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding: 1rem;
+    position: static;
+    max-height: none;
+    margin-bottom: 1.5rem;
   }
 
-  .sidebar-item {
-    flex-shrink: 0;
-    margin-bottom: 0;
+  .perfil-usuario {
+    flex-wrap: wrap;
   }
 
-  .grade-musicas {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
+  .lista-amigos {
+    justify-content: space-between;
   }
 
-  .player {
-    flex-direction: column;
-    gap: 0.5rem;
-    height: auto;
-    padding: 0.5rem;
+  .avatar-amigo {
+    width: 50px;
+    height: 50px;
   }
 
-  .progresso-musica {
-    max-width: 100%;
+  .busca-rapida {
+    order: -1;
+    margin-bottom: 1rem;
   }
 }

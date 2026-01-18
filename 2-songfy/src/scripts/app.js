@@ -2,36 +2,40 @@
 
 // Event listener for DOMContentLoaded to ensure the script runs after the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Gerenciador de sidebar já inicializado em sidebar.js
+    
     // Initialize navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
-            // Logic to handle navigation can be added here
-            console.log(`Navigating to ${this.textContent}`);
+            console.log(`Navegando para ${this.textContent}`);
         });
     });
 
-    // Example function to load song data from JSON
-    function loadSongData() {
+    // Carrega dados de músicas do JSON
+    function carregarDados() {
         fetch('../assets/data.json')
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                // Logic to display song data can be added here
+            .then(dados => {
+                console.log(dados);
+                // Lógica para exibir dados de músicas pode ser adicionada aqui
             })
-            .catch(error => console.error('Error loading song data:', error));
+            .catch(erro => console.error('Erro ao carregar dados:', erro));
     }
 
-    // Call the function to load song data
-    loadSongData();
+    carregarDados();
 
-    // Example player control functionality
-    const playButton = document.getElementById('play-button');
-    if (playButton) {
-        playButton.addEventListener('click', function() {
-            // Logic to play the song can be added here
-            console.log('Play button clicked');
+    // Funcionalidade do player
+    const botaoPlay = document.getElementById('btn-play');
+    if (botaoPlay) {
+        botaoPlay.addEventListener('click', function() {
+            console.log('Botão play clicado');
         });
+    }
+
+    // Inicializa gerenciador de sidebar
+    if (window.gerenciadorSidebar) {
+        console.log('Gerenciador de sidebar carregado com sucesso');
     }
 });

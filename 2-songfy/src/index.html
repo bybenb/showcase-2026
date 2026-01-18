@@ -22,19 +22,129 @@
             </div>
         </nav>
         
-        <div class="row">
-            <div class="col-md-3 sidebar">
-                <ul class="list-group">
-                    <li class="list-group-item"><i class="fas fa-home"></i> Início</li>
-                    <li class="list-group-item"><i class="fas fa-music"></i> Biblioteca</li>
-                    <li class="list-group-item"><i class="fas fa-playlist"></i> Playlists</li>
-                    <li class="list-group-item"><i class="fas fa-chart-line"></i> Estatísticas</li>
-                </ul>
+        <div class="container-principal">
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <!-- Perfil do Usuário -->
+            <div class="perfil-usuario">
+              <img src="https://via.placeholder.com/60" alt="Avatar" class="avatar-usuario">
+              <div class="info-usuario">
+                <h3 class="nome-usuario">João Silva</h3>
+                <span class="status-online">
+                  <span class="indicador-online"></span>
+                  Online
+                </span>
+              </div>
             </div>
-            <div class="col-md-9 main-content">
-                <h1>Welcome to Songfy</h1>
-                <p>Your music experience starts here.</p>
+    
+            <!-- Divisor -->
+            <hr class="divisor-sidebar">
+    
+            <!-- Navegação Principal -->
+            <nav class="navegacao-principal">
+              <a href="#" class="item-nav ativo" data-secao="inicio">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+              </a>
+              <a href="#" class="item-nav" data-secao="buscar">
+                <i class="fas fa-search"></i>
+                <span>Buscar</span>
+              </a>
+              <a href="#" class="item-nav" data-secao="biblioteca">
+                <i class="fas fa-music"></i>
+                <span>Biblioteca</span>
+              </a>
+              <a href="#" class="item-nav" data-secao="playlists">
+                <i class="fas fa-list"></i>
+                <span>Playlists</span>
+              </a>
+              <a href="#" class="item-nav" data-secao="estatisticas">
+                <i class="fas fa-chart-bar"></i>
+                <span>Estatísticas</span>
+              </a>
+            </nav>
+    
+            <!-- Campo de Busca Rápida -->
+            <div class="busca-rapida">
+              <input 
+                type="text" 
+                id="campo-busca-rapida" 
+                class="input-busca" 
+                placeholder="Buscar músicas, artistas..."
+              >
+              <i class="fas fa-search icone-busca"></i>
             </div>
+    
+            <!-- Divisor -->
+            <hr class="divisor-sidebar">
+    
+            <!-- Playlists do Usuário -->
+            <div class="secao-playlists">
+              <button class="botao-expandir-playlists">
+                <i class="fas fa-chevron-down"></i>
+                <span>Minhas Playlists</span>
+              </button>
+              <ul class="lista-playlists" id="lista-playlists">
+                <li class="item-playlist">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Rock Clássico</span>
+                  <span class="contador-playlist">24</span>
+                </li>
+                <li class="item-playlist">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Eletrônico</span>
+                  <span class="contador-playlist">18</span>
+                </li>
+                <li class="item-playlist">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Hits 2024</span>
+                  <span class="contador-playlist">42</span>
+                </li>
+                <li class="item-playlist">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Relaxante</span>
+                  <span class="contador-playlist">31</span>
+                </li>
+              </ul>
+              <button class="botao-nova-playlist">
+                <i class="fas fa-plus"></i>
+                <span>Nova Playlist</span>
+              </button>
+            </div>
+    
+            <!-- Divisor -->
+            <hr class="divisor-sidebar">
+    
+            <!-- Amigos Online -->
+            <div class="secao-amigos">
+              <h4 class="titulo-amigos">Amigos Online</h4>
+              <div class="lista-amigos" id="lista-amigos">
+                <div class="amigo-online" title="Ana Costa">
+                  <img src="https://via.placeholder.com/40" alt="Ana Costa" class="avatar-amigo">
+                </div>
+                <div class="amigo-online" title="Carlos Mendes">
+                  <img src="https://via.placeholder.com/40" alt="Carlos Mendes" class="avatar-amigo">
+                </div>
+                <div class="amigo-online" title="Marina Santos">
+                  <img src="https://via.placeholder.com/40" alt="Marina Santos" class="avatar-amigo">
+                </div>
+                <div class="amigo-online" title="Pedro Oliveira">
+                  <img src="https://via.placeholder.com/40" alt="Pedro Oliveira" class="avatar-amigo">
+                </div>
+                <div class="amigo-online" title="Juliana Costa">
+                  <img src="https://via.placeholder.com/40" alt="Juliana Costa" class="avatar-amigo">
+                </div>
+              </div>
+            </div>
+          </aside>
+    
+          <!-- Conteúdo Principal -->
+          <main class="conteudo-principal">
+            <h1 id="titulo-conteudo">Bem-vindo ao Songfy</h1>
+            <div class="grade-musicas" id="grade-musicas">
+              <!-- Cards de músicas serão carregados aqui -->
+            </div>
+          </main>
         </div>
         
         <div class="fixed-bottom player" style="height: 80px;">
@@ -44,6 +154,8 @@
         </div>
     </div>
 
-    <script src="scripts/app.js"></script>
+    <script src="./scripts/tema.js"></script>
+    <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/app.js"></script>
 </body>
 </html>
