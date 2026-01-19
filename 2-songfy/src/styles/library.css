@@ -1,0 +1,544 @@
+/* ========================================
+   BIBLIOTECA DE MÚSICAS - ESTILOS
+   ======================================== */
+
+/* Container Principal da Biblioteca */
+.biblioteca-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.biblioteca-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.biblioteca-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--cor-texto);
+}
+
+.biblioteca-controles {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.biblioteca-controles .input-busca {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--cor-border);
+  border-radius: 8px;
+  background-color: var(--cor-input);
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.biblioteca-controles .input-busca:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1);
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  background-color: var(--cor-secundaria);
+  padding: 0.4rem;
+  border-radius: 8px;
+}
+
+.btn-ordenacao {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-ordenacao:hover {
+  color: var(--cor-texto);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-ordenacao.ativo {
+  background-color: var(--cor-primaria);
+  color: white;
+}
+
+/* Grid de Músicas */
+.grade-musicas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+}
+
+.biblioteca-conteudo {
+  min-height: 400px;
+}
+
+/* Carta de Música */
+.carta-musica {
+  background: var(--cor-card);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.carta-musica:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.carta-imagem {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+}
+
+.carta-imagem img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carta-musica:hover .carta-imagem img {
+  transform: scale(1.05);
+}
+
+.carta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carta-musica:hover .carta-overlay {
+  opacity: 1;
+}
+
+.btn-play {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--cor-primaria);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-play:hover {
+  background: darken(var(--cor-primaria), 10%);
+  transform: scale(1.1);
+}
+
+.carta-info {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.carta-titulo {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.carta-artista {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-secundario);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carta-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--cor-texto-terciario);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carta-footer {
+  padding: 0 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid var(--cor-border);
+}
+
+.duracao {
+  font-size: 0.8rem;
+  color: var(--cor-texto-terciario);
+  font-weight: 500;
+}
+
+.carta-acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-icon:hover {
+  background: var(--cor-primaria);
+  color: white;
+}
+
+.btn-icon.favorito {
+  color: #ef4444;
+}
+
+.btn-icon.favorito:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Menu de Contexto */
+.menu-contexto {
+  position: absolute;
+  background: var(--cor-card);
+  border: 1px solid var(--cor-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 200px;
+  overflow: hidden;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-contexto button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto);
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.menu-contexto button:hover {
+  background: var(--cor-primaria);
+  color: white;
+}
+
+.menu-contexto hr {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid var(--cor-border);
+}
+
+/* Modal de Informações */
+.modal-info-musica {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background: var(--cor-card);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  z-index: 2001;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--cor-texto);
+}
+
+.modal-content .artista {
+  margin: 0 0 1.5rem 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.95rem;
+}
+
+.detalhes {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detalhe {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detalhe .label {
+  font-size: 0.8rem;
+  color: var(--cor-texto-terciario);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.detalhe .valor {
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+}
+
+.modal-content .btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-fechar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-fechar:hover {
+  background: var(--cor-primaria);
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .grade-musicas {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .grade-musicas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .biblioteca-controles {
+    flex-direction: column;
+  }
+
+  .biblioteca-controles .input-busca {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .biblioteca-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .biblioteca-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .grade-musicas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .carta-info {
+    padding: 0.75rem;
+  }
+
+  .carta-titulo {
+    font-size: 0.9rem;
+  }
+
+  .carta-artista {
+    font-size: 0.75rem;
+  }
+
+  .carta-meta {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-musicas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .biblioteca-header {
+    gap: 0.75rem;
+  }
+
+  .biblioteca-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .btn-group {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .btn-ordenacao {
+    flex: 1;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .btn-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Variáveis de Cor da Biblioteca (Light/Dark) */
+:root[data-tema="claro"] {
+  --cor-card: #ffffff;
+  --cor-input: #f3f4f6;
+  --cor-border: #e5e7eb;
+  --cor-texto: #1f2937;
+  --cor-texto-secundario: #6b7280;
+  --cor-texto-terciario: #9ca3af;
+  --cor-secundaria: #f3f4f6;
+}
+
+:root[data-tema="escuro"],
+html[data-tema="escuro"] {
+  --cor-card: #1f2937;
+  --cor-input: #374151;
+  --cor-border: #4b5563;
+  --cor-texto: #f3f4f6;
+  --cor-texto-secundario: #d1d5db;
+  --cor-texto-terciario: #9ca3af;
+  --cor-secundaria: #111827;
+}

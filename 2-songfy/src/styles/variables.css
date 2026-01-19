@@ -9,6 +9,13 @@
   --cor-borda: #E0E0E0;
   --cor-hover: #1ed760;
   --transicao: 0.3s ease;
+  
+  /* Cores adicionais para biblioteca */
+  --cor-card: #FFFFFF;
+  --cor-input: #F3F4F6;
+  --cor-border: #E5E7EB;
+  --cor-texto-terciario: #9CA3AF;
+  --cor-texto-secundario: #6B7280;
 }
 
 [data-tema="escuro"] {
@@ -22,6 +29,13 @@
   --cor-borda: #404040;
   --cor-hover: #1ed760;
   --transicao: 0.3s ease;
+  
+  /* Cores adicionais para biblioteca */
+  --cor-card: #1F2937;
+  --cor-input: #374151;
+  --cor-border: #4B5563;
+  --cor-texto-terciario: #9CA3AF;
+  --cor-texto-secundario: #D1D5DB;
 }
 
 * {
