@@ -1,63 +1,67 @@
 {
   "musicas": [
-    {
-      "id": 1,
-      "titulo": "Bilhete",
-      "artista": "Lord Sapiencia",
-      "duracao": 139,
-      "arquivo": "../musics/music4.mp3",
-      "thumb": "./image/covers/cover_2.png"
-    },
-    {
-      "id": 2,
-      "titulo": "Karma",
-      "artista": "Lord Sapiencia",
-      "duracao": 191,
-      "arquivo": "../musics/music3.mp3",
-      "thumb": "./image/covers/cover_2.png"
-    },
-    {
-      "id": 3,
-      "titulo": "A Silent Night",
-      "artista": "Lofi Petit",
-      "duracao": 128,
-      "arquivo": "../musics/music2.mp3",
-      "thumb": "./image/covers/cover_1.png"
-    },
-    {
-      "id": 4,
-      "titulo": "Late Night Study Vibes",
-      "artista": "Lofi Petit",
-      "duracao": 138,
-      "arquivo": "../musics/music1.mp3",
-      "thumb": "./image/covers/cover_1.png"
-    }
+    {"id": 1, "titulo": "Bilhete", "artista": "Lord Sapiencia", "album": "Filosofia do Nada", "duracao": 139, "genero": "Hip-Hop", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-12-15", "tocadas": 145},
+    {"id": 2, "titulo": "Karma", "artista": "Lord Sapiencia", "album": "Filosofia do Nada", "duracao": 191, "genero": "Hip-Hop", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-12-15", "tocadas": 98},
+    {"id": 3, "titulo": "A Silent Night", "artista": "Lofi Petit", "album": "Midnight Studies", "duracao": 128, "genero": "Lo-Fi", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-12-10", "tocadas": 203},
+    {"id": 4, "titulo": "Late Night Study Vibes", "artista": "Lofi Petit", "album": "Midnight Studies", "duracao": 138, "genero": "Lo-Fi", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-12-10", "tocadas": 189},
+    {"id": 5, "titulo": "Neon Dreams", "artista": "Synthwave Master", "album": "Electric Nights", "duracao": 215, "genero": "Synthwave", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-12-05", "tocadas": 156},
+    {"id": 6, "titulo": "Ocean Waves", "artista": "Ambient Audio", "album": "Nature Sounds", "duracao": 180, "genero": "Ambient", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-12-01", "tocadas": 267},
+    {"id": 7, "titulo": "Jazz in the City", "artista": "Jazz Collective", "album": "Urban Vibes", "duracao": 240, "genero": "Jazz", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-28", "tocadas": 134},
+    {"id": 8, "titulo": "Rock Anthem", "artista": "Thunder Road", "album": "Highway Sessions", "duracao": 205, "genero": "Rock", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-25", "tocadas": 321},
+    {"id": 9, "titulo": "Tropical Sunset", "artista": "Island Vibes", "album": "Beach Days", "duracao": 165, "genero": "Reggae", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-11-22", "tocadas": 198},
+    {"id": 10, "titulo": "Midnight Rain", "artista": "Lofi Petit", "album": "Rainy Days", "duracao": 152, "genero": "Lo-Fi", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-11-20", "tocadas": 276},
+    {"id": 11, "titulo": "Electric Pulse", "artista": "Synthwave Master", "album": "Electric Nights", "duracao": 188, "genero": "Synthwave", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-11-18", "tocadas": 142},
+    {"id": 12, "titulo": "Whispered Thoughts", "artista": "Lord Sapiencia", "album": "Introspection", "duracao": 168, "genero": "Hip-Hop", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-15", "tocadas": 87},
+    {"id": 13, "titulo": "Blues Highway", "artista": "Blues Brothers", "album": "Deep South", "duracao": 212, "genero": "Blues", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-12", "tocadas": 95},
+    {"id": 14, "titulo": "Electronic Horizon", "artista": "Future Sound", "album": "Next Generation", "duracao": 195, "genero": "Eletrônico", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-11-10", "tocadas": 168},
+    {"id": 15, "titulo": "Acoustic Morning", "artista": "Acoustic Dreams", "album": "Sunrise Sessions", "duracao": 175, "genero": "Acústica", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-11-08", "tocadas": 204},
+    {"id": 16, "titulo": "Classical Symphony", "artista": "Orchestra Ensemble", "album": "Timeless Classics", "duracao": 280, "genero": "Clássica", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-05", "tocadas": 76},
+    {"id": 17, "titulo": "Urban Flow", "artista": "Lord Sapiencia", "album": "Street Poetry", "duracao": 182, "genero": "Hip-Hop", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-11-02", "tocadas": 167},
+    {"id": 18, "titulo": "Sunset Dreams", "artista": "Lofi Petit", "album": "Rainy Days", "duracao": 141, "genero": "Lo-Fi", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-10-30", "tocadas": 289},
+    {"id": 19, "titulo": "Cyber Vibes", "artista": "Synthwave Master", "album": "Electric Nights", "duracao": 197, "genero": "Synthwave", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-10-28", "tocadas": 151},
+    {"id": 20, "titulo": "Reggae Paradise", "artista": "Island Vibes", "album": "Beach Days", "duracao": 173, "genero": "Reggae", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-10-25", "tocadas": 184},
+    {"id": 21, "titulo": "Metal Storm", "artista": "Thunder Road", "album": "Highway Sessions", "duracao": 248, "genero": "Rock", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-10-22", "tocadas": 134},
+    {"id": 22, "titulo": "Funk Groove", "artista": "Groove Masters", "album": "Funkadelic", "duracao": 206, "genero": "Funk", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-10-20", "tocadas": 223},
+    {"id": 23, "titulo": "Chillwave Sunset", "artista": "Ambient Audio", "album": "Nature Sounds", "duracao": 169, "genero": "Ambient", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-10-18", "tocadas": 245},
+    {"id": 24, "titulo": "Soul Connection", "artista": "Soul Singer", "album": "Heart & Soul", "duracao": 234, "genero": "Soul", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-10-15", "tocadas": 189},
+    {"id": 25, "titulo": "Indie Dreams", "artista": "Indie Band", "album": "DIY Sounds", "duracao": 187, "genero": "Indie", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-10-12", "tocadas": 156},
+    {"id": 26, "titulo": "Country Roads", "artista": "Country Star", "album": "Rural Tales", "duracao": 198, "genero": "Country", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-10-10", "tocadas": 102},
+    {"id": 27, "titulo": "Podcast Intro", "artista": "Beat Producer", "album": "Production Beats", "duracao": 145, "genero": "Eletrônico", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-10-08", "tocadas": 67},
+    {"id": 28, "titulo": "Gospel Hymn", "artista": "Gospel Choir", "album": "Spiritual Voices", "duracao": 256, "genero": "Gospel", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-10-05", "tocadas": 143},
+    {"id": 29, "titulo": "K-Pop Sensation", "artista": "K-Pop Stars", "album": "Asian Beats", "duracao": 202, "genero": "Pop", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-10-02", "tocadas": 312},
+    {"id": 30, "titulo": "Latin Rhythm", "artista": "Latin Heat", "album": "Dance Floor", "duracao": 184, "genero": "Latin", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-09-30", "tocadas": 267},
+    {"id": 31, "titulo": "EDM Festival", "artista": "DJ Pulse", "album": "Dance Hits 2025", "duracao": 220, "genero": "EDM", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-09-28", "tocadas": 298},
+    {"id": 32, "titulo": "Piano Sonata", "artista": "Piano Master", "album": "Classical Keys", "duracao": 267, "genero": "Clássica", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-09-25", "tocadas": 88},
+    {"id": 33, "titulo": "Rap Battle", "artista": "Lord Sapiencia", "album": "Street Poetry", "duracao": 156, "genero": "Hip-Hop", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-09-22", "tocadas": 201},
+    {"id": 34, "titulo": "Folk Tale", "artista": "Folk Singers", "album": "Traditional Songs", "duracao": 199, "genero": "Folk", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-09-20", "tocadas": 119},
+    {"id": 35, "titulo": "House Music Vibes", "artista": "House Master", "album": "Groove Factory", "duracao": 242, "genero": "House", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-09-18", "tocadas": 276},
+    {"id": 36, "titulo": "Acoustic Jazz", "artista": "Jazz Collective", "album": "Urban Vibes", "duracao": 218, "genero": "Jazz", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-09-15", "tocadas": 147},
+    {"id": 37, "titulo": "Disco Fever", "artista": "Disco Kings", "album": "Retro Vibes", "duracao": 228, "genero": "Disco", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-09-12", "tocadas": 185},
+    {"id": 38, "titulo": "Punk Rock", "artista": "Thunder Road", "album": "Highway Sessions", "duracao": 189, "genero": "Rock", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-09-10", "tocadas": 156},
+    {"id": 39, "titulo": "Techno Beat", "artista": "Future Sound", "album": "Next Generation", "duracao": 205, "genero": "Eletrônico", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-09-08", "tocadas": 213},
+    {"id": 40, "titulo": "R&B Smooth", "artista": "Soul Singer", "album": "Heart & Soul", "duracao": 244, "genero": "R&B", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-09-05", "tocadas": 194},
+    {"id": 41, "titulo": "Reggaeton Mix", "artista": "Latin Heat", "album": "Dance Floor", "duracao": 191, "genero": "Latin", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-09-02", "tocadas": 287},
+    {"id": 42, "titulo": "Trance Energy", "artista": "DJ Pulse", "album": "Dance Hits 2025", "duracao": 251, "genero": "EDM", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-08-30", "tocadas": 234},
+    {"id": 43, "titulo": "Blues Soul", "artista": "Blues Brothers", "album": "Deep South", "duracao": 224, "genero": "Blues", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-08-28", "tocadas": 127},
+    {"id": 44, "titulo": "Indie Folk", "artista": "Indie Band", "album": "DIY Sounds", "duracao": 173, "genero": "Indie", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-08-25", "tocadas": 165},
+    {"id": 45, "titulo": "Ambient Meditation", "artista": "Ambient Audio", "album": "Nature Sounds", "duracao": 276, "genero": "Ambient", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-08-22", "tocadas": 312},
+    {"id": 46, "titulo": "Pop Hit 2025", "artista": "K-Pop Stars", "album": "Asian Beats", "duracao": 189, "genero": "Pop", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-08-20", "tocadas": 398},
+    {"id": 47, "titulo": "Heavy Metal", "artista": "Thunder Road", "album": "Highway Sessions", "duracao": 267, "genero": "Rock", "arquivo": "../musics/music2.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-08-18", "tocadas": 108},
+    {"id": 48, "titulo": "Reggae Chilling", "artista": "Island Vibes", "album": "Beach Days", "duracao": 187, "genero": "Reggae", "arquivo": "../musics/music3.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-08-15", "tocadas": 229},
+    {"id": 49, "titulo": "Synth Pop", "artista": "Synthwave Master", "album": "Electric Nights", "duracao": 176, "genero": "Synthwave", "arquivo": "../musics/music4.mp3", "thumb": "./image/covers/cover_3.png", "dataAdicao": "2025-08-12", "tocadas": 197},
+    {"id": 50, "titulo": "Lofi Beats", "artista": "Lofi Petit", "album": "Midnight Studies", "duracao": 154, "genero": "Lo-Fi", "arquivo": "../musics/music1.mp3", "thumb": "./image/covers/cover_1.png", "dataAdicao": "2025-08-10", "tocadas": 341}
   ],
   "playlists": [
-    {
-      "id": 1,
-      "nome": "Rock Clássico",
-      "quantidade": 24
-    },
-    {
-      "id": 2,
-      "nome": "Eletrônico",
-      "quantidade": 18
-    },
-    {
-      "id": 3,
-      "nome": "Hits 2024",
-      "quantidade": 42
-    },
-    {
-      "id": 4,
-      "nome": "Relaxante",
-      "quantidade": 31
-    }
+    {"id": 1, "nome": "Rock Clássico", "quantidade": 12},
+    {"id": 2, "nome": "Eletrônico", "quantidade": 8},
+    {"id": 3, "nome": "Lo-Fi Study", "quantidade": 6},
+    {"id": 4, "nome": "Relaxante", "quantidade": 10}
   ],
   "userStatistics": {
-    "totalMusicas": 4,
-    "totalTempo": 596,
-    "playlistsTotal": 4
+    "totalMusicas": 50,
+    "totalTempo": 10250,
+    "playlistsTotal": 4,
+    "artistasUnicos": 24,
+    "generos": 25
   }
 }

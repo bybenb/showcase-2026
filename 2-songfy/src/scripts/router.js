@@ -104,9 +104,80 @@
   async function renderLibrary() {
     const el = appEl();
     el.innerHTML = `
-      <h2>Biblioteca</h2>
-      <p>Sua biblioteca será exibida aqui.</p>
+      <div class="biblioteca-container">
+        <div class="biblioteca-header">
+          <h2>Biblioteca de Músicas</h2>
+          <div class="biblioteca-controles">
+            <input type="text" id="search-biblioteca" class="input-busca" placeholder="Buscar músicas...">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn-ordenacao" data-ordem="alfabetico" title="Alfabético">A-Z</button>
+              <button type="button" class="btn-ordenacao" data-ordem="tocadas" title="Mais tocadas">🔥</button>
+              <button type="button" class="btn-ordenacao" data-ordem="recentes" title="Mais recentes">⏱️</button>
+            </div>
+          </div>
+        </div>
+        <div class="biblioteca-conteudo">
+          <div id="grid-biblioteca" class="grade-musicas">Carregando biblioteca...</div>
+        </div>
+      </div>
     `;
+
+    // Carrega a biblioteca
+    const qtd = await window.musicLibrary.carregar();
+    if (qtd === 0) {
+      const grid = document.getElementById('grid-biblioteca');
+      grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Erro ao carregar biblioteca</p>';
+      return;
+    }
+
+    // Renderiza grid inicial
+    const grid = document.getElementById('grid-biblioteca');
+    window.musicLibrary.renderGrid(grid, null, (musica) => {
+      if (window.audioPlayer) {
+        window.audioPlayer.carregarMusica(musica);
+        window.audioPlayer.play();
+      }
+    });
+
+    // Event listeners
+    const searchInput = document.getElementById('search-biblioteca');
+    searchInput.addEventListener('input', (e) => {
+      window.musicLibrary.buscar(e.target.value);
+      window.musicLibrary.renderGrid(grid, null, (musica) => {
+        if (window.audioPlayer) {
+          window.audioPlayer.carregarMusica(musica);
+          window.audioPlayer.play();
+        }
+      });
+    });
+
+    // Botões de ordenação
+    document.querySelectorAll('.btn-ordenacao').forEach(btn => {
+      btn.classList.remove('ativo');
+      if (btn.getAttribute('data-ordem') === 'alfabetico') btn.classList.add('ativo');
+
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.btn-ordenacao').forEach(b => b.classList.remove('ativo'));
+        e.target.classList.add('ativo');
+        window.musicLibrary.ordenar(e.target.getAttribute('data-ordem'));
+        window.musicLibrary.renderGrid(grid, null, (musica) => {
+          if (window.audioPlayer) {
+            window.audioPlayer.carregarMusica(musica);
+            window.audioPlayer.play();
+          }
+        });
+      });
+    });
+
+    // Listener para mudanças globais na biblioteca
+    window.addEventListener('bibliotecaMudou', () => {
+      window.musicLibrary.renderGrid(grid, null, (musica) => {
+        if (window.audioPlayer) {
+          window.audioPlayer.carregarMusica(musica);
+          window.audioPlayer.play();
+        }
+      });
+    });
   }
 
   async function renderPlaylist(params) {
