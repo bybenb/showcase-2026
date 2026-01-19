@@ -1,10 +1,10 @@
-# 📚 Sistema de Biblioteca de Músicas - Songfy
+# Sistema de Biblioteca de Músicas - Songfy
 
-## 🎯 Visão Geral
+## Visão Geral
 
 Sistema completo de gerenciamento de biblioteca de músicas com **50 músicas mock**, filtros avançados, busca em tempo real e interface responsiva.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 ### 1. **Classe MusicLibrary**
 Gerencia toda a lógica da biblioteca com os seguintes métodos:
