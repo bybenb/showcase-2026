@@ -41,8 +41,13 @@ class GerenciadorPlayer {
 
   carregarMusicas() {
     // Carrega a lista de músicas do JSON
-    fetch('../assets/musicas.json')
-      .then(response => response.json())
+    fetch('./assets/musicas.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro ao carregar JSON: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(dados => {
         this.musicas = dados.musicas;
         console.log(`Carregadas ${this.musicas.length} músicas`);
@@ -63,18 +68,18 @@ class GerenciadorPlayer {
       {
         id: 1,
         titulo: 'Neon Dreams',
-        artista: 'Synthwave Vibes',
+        artista: 'Lorde Vibes',
         duracao: 245,
-        arquivo: '../musics/music3.mp3',
-        thumb: '../assets/image/covers/cover_1.png'
+        arquivo: '../musics/music4.mp3',
+        thumb: '../assets/image/covers/cover_2.png'
       },
       {
         id: 2,
         titulo: 'Electric Heart',
-        artista: 'Digital Souls',
+        artista: 'LofiDigital Souls',
         duracao: 198,
         arquivo: '../musics/music2.mp3',
-        thumb: '../assets/image/covers/cover_2.png'
+        thumb: '../assets/image/covers/cover_1.png'
       }
     ];
   }
