@@ -5,7 +5,7 @@
       "titulo": "Bilhete",
       "artista": "Lord Sapiencia",
       "duracao": 139,
-      "arquivo": "./musics/music4.mp3",
+      "arquivo": "../musics/music4.mp3",
       "thumb": "./image/covers/cover_2.png"
     },
     {
@@ -13,7 +13,7 @@
       "titulo": "Karma",
       "artista": "Lord Sapiencia",
       "duracao": 191,
-      "arquivo": "./musics/music3.mp3",
+      "arquivo": "../musics/music3.mp3",
       "thumb": "./image/covers/cover_2.png"
     },
     {
@@ -21,7 +21,7 @@
       "titulo": "A Silent Night",
       "artista": "Lofi Petit",
       "duracao": 128,
-      "arquivo": "./musics/music2.mp3",
+      "arquivo": "../musics/music2.mp3",
       "thumb": "./image/covers/cover_1.png"
     },
     {
@@ -29,7 +29,7 @@
       "titulo": "Late Night Study Vibes",
       "artista": "Lofi Petit",
       "duracao": 138,
-      "arquivo": "./musics/music1.mp3",
+      "arquivo": "../musics/music1.mp3",
       "thumb": "./image/covers/cover_1.png"
     }
   ],

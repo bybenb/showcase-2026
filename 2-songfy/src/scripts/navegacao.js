@@ -11,7 +11,7 @@ class GerenciadorNavegacao {
   inicializar() {
     this.configurarMenuMobile();
     this.configurarHeaderNav();
-    this.configurarBotoesTemaNão();
+    this.configurarBotoesTeма();
   }
 
   configurarMenuMobile() {
@@ -46,7 +46,7 @@ class GerenciadorNavegacao {
     });
   }
 
-  configurarBotoesTemaNão() {
+  configurarBotoesTeма() {
     if (this.btnTemaHeader) {
       this.btnTemaHeader.addEventListener('click', () => {
         if (window.gerenciadorTema) {

@@ -129,12 +129,13 @@ class GerenciadorPlayer {
     const musica = this.musicas[indice];
 
     // Atualiza UI
-    this.playerThumb.src = musica.thumb;
+    // Resolve o caminho da thumbnail relativo à pasta assets
+    this.playerThumb.src = './assets/' + musica.thumb;
     this.playerTitulo.textContent = musica.titulo;
     this.playerArtista.textContent = musica.artista;
 
-    // Carrega o áudio
-    this.audio.src = musica.arquivo;
+    // Carrega o áudio - resolve o caminho relativo à pasta assets
+    this.audio.src = './assets/' + musica.arquivo;
     this.audio.load();
 
     // Reset do progresso
@@ -143,7 +144,7 @@ class GerenciadorPlayer {
 
     this.atualizarFavorito();
 
-    console.log(`Música carregada: ${musica.titulo} - ${musica.arquivo}`);
+    console.log(`Música carregada: ${musica.titulo} - ${this.audio.src}`);
   }
 
   alternarPlayPausa() {
