@@ -17,7 +17,7 @@
       "thumb": "../assets/image/covers/cover_2.png"
     },
     {
-      "id": 2,
+      "id": 3,
       "titulo": "A Silent Night",
       "artista": "Lofi Petit",
       "duracao": 128,
@@ -25,12 +25,39 @@
       "thumb": "../assets/image/covers/cover_1.png"
     },
     {
-      "id": 3,
+      "id": 4,
       "titulo": "Late Night Study Vibes",
       "artista": "Lofi Petit",
       "duracao": 138,
       "arquivo": "../musics/music1.mp3",
       "thumb": "../assets/image/covers/cover_1.png"
     }
-  ]
+  ],
+  "playlists": [
+    {
+      "id": 1,
+      "nome": "Rock Clássico",
+      "quantidade": 24
+    },
+    {
+      "id": 2,
+      "nome": "Eletrônico",
+      "quantidade": 18
+    },
+    {
+      "id": 3,
+      "nome": "Hits 2024",
+      "quantidade": 42
+    },
+    {
+      "id": 4,
+      "nome": "Relaxante",
+      "quantidade": 31
+    }
+  ],
+  "userStatistics": {
+    "totalMusicas": 4,
+    "totalTempo": 596,
+    "playlistsTotal": 4
+  }
 }
