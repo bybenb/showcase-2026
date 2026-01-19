@@ -1,0 +1,476 @@
+/* Player Principal */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: var(--cor-fundo-secundaria);
+  border-top: 1px solid var(--cor-borda);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Seção Esquerda - Informações */
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 250px;
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+.player-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all var(--transicao);
+}
+
+.player-thumb:hover {
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+  transform: scale(1.05);
+}
+
+.player-texto {
+  flex: 1;
+  overflow: hidden;
+}
+
+.player-titulo {
+  margin: 0;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.player-titulo:hover {
+  color: var(--cor-primaria);
+}
+
+.player-artista {
+  margin: 0.2rem 0 0 0;
+  color: var(--cor-texto-secundaria);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Seção Centro - Controles e Progresso */
+.player-centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 500px;
+}
+
+/* Visualizador de Ondas */
+.visualizador-ondas {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 24px;
+  opacity: 0;
+  transition: opacity var(--transicao);
+}
+
+.player.tocando .visualizador-ondas {
+  opacity: 1;
+}
+
+.onda {
+  width: 3px;
+  background: linear-gradient(to top, var(--cor-primaria), var(--cor-hover));
+  border-radius: 2px;
+  animation: pulsoOnda 0.6s ease-in-out infinite;
+}
+
+.onda:nth-child(1) { animation-delay: 0s; }
+.onda:nth-child(2) { animation-delay: 0.1s; }
+.onda:nth-child(3) { animation-delay: 0.2s; }
+.onda:nth-child(4) { animation-delay: 0.1s; }
+.onda:nth-child(5) { animation-delay: 0s; }
+
+@keyframes pulsoOnda {
+  0%, 100% { height: 4px; }
+  50% { height: 20px; }
+}
+
+/* Controles Principais */
+.player-controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.btn-controle {
+  background-color: transparent;
+  border: none;
+  color: var(--cor-texto);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all var(--transicao);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-controle:hover {
+  color: var(--cor-primaria);
+  transform: scale(1.1);
+}
+
+.btn-play-principal {
+  width: 45px;
+  height: 45px;
+  background-color: var(--cor-primaria);
+  color: white;
+  font-size: 1rem;
+}
+
+.btn-play-principal:hover {
+  background-color: var(--cor-hover);
+  transform: scale(1.15);
+}
+
+/* Barra de Progresso */
+.barra-progresso-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.tempo-atual,
+.tempo-total {
+  color: var(--cor-texto-secundaria);
+  font-size: 0.8rem;
+  min-width: 35px;
+  text-align: center;
+}
+
+.slider-progresso {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(to right, var(--cor-primaria) 0%, var(--cor-primaria) 0%, var(--cor-borda) 0%, var(--cor-borda) 100%);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: background var(--transicao);
+}
+
+.slider-progresso::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
+  transition: all var(--transicao);
+}
+
+.slider-progresso::-webkit-slider-thumb:hover {
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.8);
+}
+
+.slider-progresso::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
+  transition: all var(--transicao);
+}
+
+.slider-progresso::-moz-range-thumb:hover {
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.8);
+}
+
+.slider-progresso::-moz-range-track {
+  border: none;
+  background: transparent;
+}
+
+/* Seção Direita - Volume e Opções */
+.player-direita {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+/* Controle de Volume */
+.controle-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-volume {
+  background-color: transparent;
+  border: none;
+  color: var(--cor-texto);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all var(--transicao);
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-volume:hover {
+  color: var(--cor-primaria);
+  transform: scale(1.1);
+}
+
+.btn-volume.mudo {
+  color: #FF6B6B;
+}
+
+.slider-volume {
+  width: 80px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--cor-borda);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  cursor: pointer;
+  transition: all var(--transicao);
+}
+
+.slider-volume::-webkit-slider-thumb:hover {
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 8px rgba(29, 185, 84, 0.5);
+}
+
+.slider-volume::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transicao);
+}
+
+.slider-volume::-moz-range-track {
+  border: none;
+  background: transparent;
+}
+
+/* Botões Adicionais */
+.botoes-adicionais {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-opcao {
+  background-color: transparent;
+  border: none;
+  color: var(--cor-texto);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all var(--transicao);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+}
+
+.btn-opcao:hover {
+  color: var(--cor-primaria);
+  transform: scale(1.1);
+}
+
+.btn-opcao.ativo {
+  color: var(--cor-primaria);
+  background-color: rgba(29, 185, 84, 0.1);
+  border-radius: 50%;
+}
+
+.btn-favorito i {
+  transition: all var(--transicao);
+}
+
+.btn-favorito.favoritado i {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.btn-favorito.favoritado:hover i {
+  transform: scale(1.2);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .player {
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .player-info {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .slider-volume {
+    width: 60px;
+  }
+
+  .player-direita {
+    width: auto;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .player {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .player-info {
+    width: 100%;
+    min-width: 100%;
+    order: 1;
+  }
+
+  .player-centro {
+    width: 100%;
+    max-width: 100%;
+    order: 2;
+    gap: 0.5rem;
+  }
+
+  .player-direita {
+    width: 100%;
+    min-width: 100%;
+    order: 3;
+    justify-content: space-between;
+  }
+
+  .visualizador-ondas {
+    height: 20px;
+  }
+
+  .slider-volume {
+    width: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .player {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .player-info {
+    width: 100%;
+  }
+
+  .player-thumb {
+    width: 50px;
+    height: 50px;
+  }
+
+  .player-titulo {
+    font-size: 0.9rem;
+  }
+
+  .player-artista {
+    font-size: 0.8rem;
+  }
+
+  .btn-controle {
+    font-size: 1.1rem;
+  }
+
+  .btn-play-principal {
+    width: 40px;
+    height: 40px;
+  }
+
+  .barra-progresso-container {
+    gap: 0.5rem;
+  }
+
+  .tempo-atual,
+  .tempo-total {
+    font-size: 0.75rem;
+    min-width: 30px;
+  }
+
+  .slider-progresso {
+    height: 3px;
+  }
+
+  .btn-opcao {
+    font-size: 1rem;
+    min-width: 32px;
+    height: 32px;
+  }
+
+  .slider-volume {
+    width: 50px;
+  }
+
+  .controle-volume {
+    gap: 0.5rem;
+  }
+
+  .botoes-adicionais {
+    gap: 0.5rem;
+  }
+}

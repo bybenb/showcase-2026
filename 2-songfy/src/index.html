@@ -6,7 +6,9 @@
     <title>Songfy</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/variables.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/player.css">
 </head>
 <body>
     <div class="container-fluid">
@@ -27,9 +29,9 @@
           <aside class="sidebar">
             <!-- Perfil do Usuário -->
             <div class="perfil-usuario">
-              <img src="https://via.placeholder.com/60" alt="Avatar" class="avatar-usuario">
+              <img src="../assets/image/img_profile-0.jpg" alt="Avatar" class="avatar-usuario">
               <div class="info-usuario">
-                <h3 class="nome-usuario">João Silva</h3>
+                <h3 class="nome-usuario">Kakarotto</h3>
                 <span class="status-online">
                   <span class="indicador-online"></span>
                   Online
@@ -119,20 +121,20 @@
             <div class="secao-amigos">
               <h4 class="titulo-amigos">Amigos Online</h4>
               <div class="lista-amigos" id="lista-amigos">
-                <div class="amigo-online" title="Ana Costa">
-                  <img src="https://via.placeholder.com/40" alt="Ana Costa" class="avatar-amigo">
+                <div class="amigo-online" title="All Might">
+                  <img src="../assets/image/img_profile-1.jpg" alt="All Might" class="avatar-amigo">
                 </div>
-                <div class="amigo-online" title="Carlos Mendes">
-                  <img src="https://via.placeholder.com/40" alt="Carlos Mendes" class="avatar-amigo">
+                <div class="amigo-online" title="Star Butterfly">
+                  <img src="../assets/image/img_profile-2.jpg" alt="Star" class="avatar-amigo">
                 </div>
-                <div class="amigo-online" title="Marina Santos">
-                  <img src="https://via.placeholder.com/40" alt="Marina Santos" class="avatar-amigo">
+                <div class="amigo-online" title="William Vangeance">
+                  <img src="../assets/image/img_profile-3.jpg" alt="William Vangeance" class="avatar-amigo">
                 </div>
-                <div class="amigo-online" title="Pedro Oliveira">
-                  <img src="https://via.placeholder.com/40" alt="Pedro Oliveira" class="avatar-amigo">
+                <div class="amigo-online" title="Sarada Uchiha">
+                  <img src="../assets/image/img_profile-4.jpg" alt="Sarada" class="avatar-amigo">
                 </div>
-                <div class="amigo-online" title="Juliana Costa">
-                  <img src="https://via.placeholder.com/40" alt="Juliana Costa" class="avatar-amigo">
+                <div class="amigo-online" title="Sae Itoshi">
+                  <img src="../assets/image/img_profile-5.jpg" alt="Itoshi Sae" class="avatar-amigo">
                 </div>
               </div>
             </div>
@@ -147,15 +149,98 @@
           </main>
         </div>
         
-        <div class="fixed-bottom player" style="height: 80px;">
-            <div class="container">
-                <p>Player controls go here</p>
+        <!-- Player Fixo -->
+        <div class="player">
+            <!-- Seção Esquerda: Informações da Música -->
+            <div class="player-info">
+                <img src="../assets/image/img_profile-0.jpg" alt="Capa" class="player-thumb" id="player-thumb">
+                <div class="player-texto">
+                    <p class="player-titulo" id="player-titulo">Nenhuma música</p>
+                    <p class="player-artista" id="player-artista">Selecione uma música</p>
+                </div>
+            </div>
+
+            <!-- Seção Centro: Controles e Progresso -->
+            <div class="player-centro">
+                <!-- Visualizador de Ondas -->
+                <div class="visualizador-ondas" id="visualizador-ondas">
+                    <div class="onda"></div>
+                    <div class="onda"></div>
+                    <div class="onda"></div>
+                    <div class="onda"></div>
+                    <div class="onda"></div>
+                </div>
+
+                <!-- Controles Principais -->
+                <div class="player-controles">
+                    <button class="btn-controle btn-anterior" id="btn-anterior" title="Anterior">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="btn-controle btn-play-principal" id="btn-play-principal" title="Play/Pausa">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn-controle btn-proximo" id="btn-proximo" title="Próximo">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+
+                <!-- Barra de Progresso -->
+                <div class="barra-progresso-container">
+                    <span class="tempo-atual" id="tempo-atual">0:00</span>
+                    <input 
+                        type="range" 
+                        class="slider-progresso" 
+                        id="slider-progresso" 
+                        min="0" 
+                        max="100" 
+                        value="0"
+                    >
+                    <span class="tempo-total" id="tempo-total">0:00</span>
+                </div>
+            </div>
+
+            <!-- Seção Direita: Volume e Controles Adicionais -->
+            <div class="player-direita">
+                <!-- Controle de Volume -->
+                <div class="controle-volume">
+                    <button class="btn-volume" id="btn-volume" title="Mudo">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input 
+                        type="range" 
+                        class="slider-volume" 
+                        id="slider-volume" 
+                        min="0" 
+                        max="100" 
+                        value="70"
+                    >
+                </div>
+
+                <!-- Botões Adicionais -->
+                <div class="botoes-adicionais">
+                    <button class="btn-opcao btn-loop" id="btn-loop" title="Loop (0)">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="btn-opcao btn-shuffle" id="btn-shuffle" title="Embaralhar">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button class="btn-opcao btn-fila" id="btn-fila" title="Fila">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button class="btn-opcao btn-favorito" id="btn-favorito" title="Favoritar">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn-opcao btn-tela-cheia" id="btn-tela-cheia" title="Tela Cheia">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="./scripts/tema.js"></script>
     <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/player.js"></script>
     <script src="./scripts/app.js"></script>
 </body>
 </html>
