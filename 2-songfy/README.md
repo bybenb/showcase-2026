@@ -1,19 +1,23 @@
 # Songfy Application
 
-## Overview
 Songfy is a web application designed for music streaming and management. It provides users with a seamless experience to explore their music library, create playlists, and access various statistics related to their listening habits.
 
 ## Project Structure
 ```
 songfy
-├── src
+├── src/
 │   ├── index.html
-│   ├── styles
-│   │   └── style.css
-│   └── scripts
-│       └── app.js
-├── assets
-│   └── data.json
+│   ├── assets/
+│   ├── styles/
+│   ├── scripts
+│   └── musics/
+│
+├── docs/
+│
+├── assets/
+│   ├── data.json
+│   └── image/
+│
 └── README.md
 ```
 
@@ -26,11 +30,11 @@ songfy
 ## Setup Instructions
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/bybenb/showcase-2026.git
    ```
 2. Navigate to the project directory:
    ```
-   cd songfy
+   cd showcase-2026/2-songfy/
    ```
 3. Open `src/index.html` in your web browser to view the application.
 
@@ -42,5 +46,7 @@ songfy
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any suggestions or improvements.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+## Author
+- [Beny B Reis](https://www.instagram.com/bkapa8/)
+- [isbenyreis@gmail.com](mailto:isbenyreis@gmail.com)
+
