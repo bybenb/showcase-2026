@@ -13,18 +13,30 @@
     <link rel="stylesheet" href="styles/player.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Songfy</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Biblioteca</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Playlists</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Estatísticas</a></li>
-                </ul>
+    <!-- Header Desktop -->
+    <header class="header-desktop">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-music"></i>Songfy
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#" data-nav="inicio"><i class="fas fa-home"></i> Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-nav="biblioteca"><i class="fas fa-compact-disc"></i> Biblioteca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-nav="playlists"><i class="fas fa-list"></i> Playlists</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-nav="estatisticas"><i class="fas fa-chart-bar"></i> Estatísticas</a></li>
+                    </ul>
+                    <button class="btn-toggle-tema ms-3" id="btn-toggle-tema-header" title="Alternar tema">🌙</button>
+                </div>
             </div>
         </nav>
+    </header>
+
+    <div class="container-fluid">
         
         <div class="container-principal">
           <!-- Sidebar -->
@@ -240,6 +252,31 @@
         </div>
     </div>
 
+    <!-- Menu Inferior Mobile -->
+    <nav class="menu-mobile">
+        <a href="#" class="item-menu-mobile ativo" data-nav="inicio" title="Início">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </a>
+        <a href="#" class="item-menu-mobile" data-nav="buscar" title="Buscar">
+            <i class="fas fa-search"></i>
+            <span>Buscar</span>
+        </a>
+        <a href="#" class="item-menu-mobile" data-nav="biblioteca" title="Biblioteca">
+            <i class="fas fa-compact-disc"></i>
+            <span>Biblioteca</span>
+        </a>
+        <a href="#" class="item-menu-mobile" data-nav="playlists" title="Playlists">
+            <i class="fas fa-list"></i>
+            <span>Playlists</span>
+        </a>
+        <button class="item-menu-mobile" id="btn-menu-mobile-tema" title="Alternar tema">
+            <i class="fas fa-moon"></i>
+            <span>Tema</span>
+        </button>
+    </nav>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="./scripts/tema.js"></script>
     <script src="./scripts/sidebar.js"></script>
     <script src="./scripts/player.js"></script>
