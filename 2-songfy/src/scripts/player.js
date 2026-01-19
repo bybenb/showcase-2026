@@ -65,16 +65,16 @@ class GerenciadorPlayer {
         titulo: 'Neon Dreams',
         artista: 'Synthwave Vibes',
         duracao: 245,
-        arquivo: '../musics/track1.mp3',
-        thumb: '../assets/image/img_profile-1.jpg'
+        arquivo: '../musics/music3.mp3',
+        thumb: '../assets/image/covers/cover_1.png'
       },
       {
         id: 2,
         titulo: 'Electric Heart',
         artista: 'Digital Souls',
         duracao: 198,
-        arquivo: '../musics/track2.mp3',
-        thumb: '../assets/image/img_profile-2.jpg'
+        arquivo: '../musics/music2.mp3',
+        thumb: '../assets/image/covers/cover_2.png'
       }
     ];
   }
