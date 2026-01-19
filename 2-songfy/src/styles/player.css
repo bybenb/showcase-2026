@@ -351,11 +351,11 @@
   transform: scale(1.2);
 }
 
-/* Responsividade */
+/* Responsividade - Tablet */
 @media (max-width: 1200px) {
   .player {
     gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .player-info {
@@ -370,6 +370,12 @@
   .player-direita {
     width: auto;
     min-width: auto;
+  }
+
+  .btn-opcao {
+    font-size: 1rem;
+    min-width: 32px;
+    height: 32px;
   }
 }
 
@@ -399,6 +405,7 @@
     min-width: 100%;
     order: 3;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .visualizador-ondas {
@@ -406,14 +413,37 @@
   }
 
   .slider-volume {
-    width: 100px;
+    width: 80px;
+  }
+
+  .controle-volume {
+    flex: 1;
+  }
+
+  .botoes-adicionais {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .player-controles {
+    gap: 1rem;
+  }
+
+  .btn-controle {
+    font-size: 1.2rem;
+  }
+
+  .btn-play-principal {
+    width: 42px;
+    height: 42px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .player {
-    padding: 0.5rem;
+    padding: 0.6rem;
     gap: 0.5rem;
+    height: auto;
   }
 
   .player-info {
@@ -433,6 +463,11 @@
     font-size: 0.8rem;
   }
 
+  .player-centro {
+    width: 100%;
+    gap: 0.4rem;
+  }
+
   .btn-controle {
     font-size: 1.1rem;
   }
@@ -440,6 +475,7 @@
   .btn-play-principal {
     width: 40px;
     height: 40px;
+    font-size: 0.9rem;
   }
 
   .barra-progresso-container {
@@ -449,11 +485,34 @@
   .tempo-atual,
   .tempo-total {
     font-size: 0.75rem;
-    min-width: 30px;
+    min-width: 28px;
   }
 
   .slider-progresso {
     height: 3px;
+  }
+
+  .player-direita {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .controle-volume {
+    gap: 0.5rem;
+    flex: 0;
+  }
+
+  .btn-volume {
+    font-size: 1rem;
+    min-width: 36px;
+  }
+
+  .slider-volume {
+    width: 60px;
+  }
+
+  .botoes-adicionais {
+    gap: 0.5rem;
   }
 
   .btn-opcao {
@@ -462,15 +521,108 @@
     height: 32px;
   }
 
+  .visualizador-ondas {
+    height: 18px;
+    gap: 2px;
+  }
+
+  .onda {
+    width: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .player {
+    padding: 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .player-info {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .player-thumb {
+    width: 45px;
+    height: 45px;
+  }
+
+  .player-titulo {
+    font-size: 0.85rem;
+  }
+
+  .player-artista {
+    font-size: 0.75rem;
+  }
+
+  .player-centro {
+    gap: 0.3rem;
+  }
+
+  .player-controles {
+    gap: 0.75rem;
+  }
+
+  .btn-controle {
+    font-size: 1rem;
+    padding: 0.4rem;
+  }
+
+  .btn-play-principal {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .barra-progresso-container {
+    gap: 0.4rem;
+  }
+
+  .tempo-atual,
+  .tempo-total {
+    font-size: 0.7rem;
+    min-width: 25px;
+  }
+
+  .slider-progresso {
+    height: 2px;
+  }
+
+  .visualizador-ondas {
+    height: 16px;
+    gap: 1px;
+  }
+
+  .onda {
+    width: 2px;
+  }
+
+  .player-direita {
+    gap: 0.3rem;
+  }
+
+  .controle-volume {
+    gap: 0.3rem;
+  }
+
+  .btn-volume {
+    font-size: 0.95rem;
+    min-width: 32px;
+    padding: 0.4rem;
+  }
+
   .slider-volume {
     width: 50px;
   }
 
-  .controle-volume {
-    gap: 0.5rem;
+  .botoes-adicionais {
+    gap: 0.3rem;
   }
 
-  .botoes-adicionais {
-    gap: 0.5rem;
+  .btn-opcao {
+    font-size: 0.95rem;
+    min-width: 28px;
+    height: 28px;
+    padding: 0.3rem;
   }
 }

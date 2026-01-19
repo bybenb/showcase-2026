@@ -13,24 +13,33 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  padding-bottom: 80px;
 }
 
 /* Navbar */
 .navbar {
   background-color: var(--cor-fundo-secundaria) !important;
   border-bottom: 1px solid var(--cor-borda);
-  padding: 1rem 0;
+  padding: 0.75rem 1rem !important;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar-brand {
   color: var(--cor-primaria) !important;
   font-weight: bold;
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-link {
   color: var(--cor-texto) !important;
   margin: 0 0.5rem;
+  font-size: 0.95rem;
+  transition: all var(--transicao);
 }
 
 .nav-link:hover {
@@ -49,6 +58,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all var(--transicao);
 }
 
 .btn-toggle-tema:hover {
@@ -62,8 +72,10 @@ body {
   display: flex;
   flex: 1;
   gap: 2rem;
-  padding: 2rem 1rem;
-  margin-bottom: 80px;
+  padding: 2rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
 }
 
 /* Sidebar */
@@ -74,9 +86,10 @@ body {
   padding: 1.5rem;
   height: fit-content;
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 160px);
+  top: 100px;
+  max-height: calc(100vh - 180px);
   overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -113,10 +126,12 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--cor-primaria);
+  flex-shrink: 0;
 }
 
 .info-usuario {
   flex: 1;
+  min-width: 0;
 }
 
 .nome-usuario {
@@ -132,6 +147,7 @@ body {
   gap: 0.5rem;
   color: var(--cor-texto-secundaria);
   font-size: 0.85rem;
+  margin-top: 0.3rem;
 }
 
 .indicador-online {
@@ -184,6 +200,7 @@ body {
 .item-nav i {
   width: 20px;
   text-align: center;
+  font-size: 1.1rem;
 }
 
 /* Busca Rápida */
@@ -258,6 +275,8 @@ body {
   list-style: none;
   padding: 0;
   margin: 0.75rem 0 1rem 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .item-playlist {
@@ -367,17 +386,19 @@ body {
   background-color: var(--cor-fundo-secundaria);
   border-radius: 8px;
   padding: 2rem;
+  min-width: 0;
 }
 
 .conteudo-principal h1 {
   color: var(--cor-primaria);
   margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 /* Grid responsivo */
 .grade-musicas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1.5rem;
 }
 
@@ -399,7 +420,7 @@ body {
 
 .carta-musica img {
   width: 100%;
-  height: 150px;
+  height: 120px;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -407,144 +428,294 @@ body {
 
 .carta-musica h3 {
   color: var(--cor-texto);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
+  word-break: break-word;
 }
 
 .carta-musica p {
   color: var(--cor-texto-secundaria);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  word-break: break-word;
 }
 
-/* Player fixo */
-.player {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background-color: var(--cor-fundo-secundaria);
-  border-top: 1px solid var(--cor-borda);
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
+/* Responsivo - Tablet */
+@media (max-width: 1200px) {
+  .container-principal {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
 
-.player-info {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--cor-texto);
-}
-
-.player-info img {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
-}
-
-.player-controles {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.player-controles button {
-  background-color: transparent;
-  border: none;
-  color: var(--cor-texto);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.player-controles button:hover {
-  color: var(--cor-primaria);
-}
-
-.btn-play {
-  width: 50px;
-  height: 50px;
-  background-color: var(--cor-primaria);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-play:hover {
-  background-color: var(--cor-hover);
-}
-
-.progresso-musica {
-  flex: 1;
-  max-width: 300px;
-}
-
-.barra-progresso {
-  width: 100%;
-  height: 4px;
-  background-color: var(--cor-borda);
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-.barra-progresso-preenchida {
-  height: 100%;
-  background-color: var(--cor-primaria);
-  border-radius: 2px;
-}
-
-/* Footer */
-.footer {
-  background-color: var(--cor-fundo-secundaria);
-  border-top: 1px solid var(--cor-borda);
-  padding: 2rem;
-  text-align: center;
-  color: var(--cor-texto-secundaria);
-  margin-top: 2rem;
-}
-
-/* Responsivo */
-@media (max-width: 992px) {
   .sidebar {
     width: 250px;
   }
+
+  .conteudo-principal {
+    padding: 1.5rem;
+  }
+
+  .grade-musicas {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1rem;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .container-principal {
     flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
   }
 
   .sidebar {
     width: 100%;
     position: static;
     max-height: none;
-    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
   }
 
   .perfil-usuario {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .navegacao-principal {
+    grid-column: 1 / -1;
+    flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 0;
   }
 
-  .lista-amigos {
-    justify-content: space-between;
+  .item-nav {
+    flex: 1;
+    min-width: 120px;
   }
 
-  .avatar-amigo {
+  .busca-rapida {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .secao-playlists {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .secao-amigos {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .conteudo-principal {
+    padding: 1rem;
+  }
+
+  .conteudo-principal h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .grade-musicas {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .carta-musica {
+    padding: 0.75rem;
+  }
+
+  .carta-musica img {
+    height: 100px;
+    margin-bottom: 0.75rem;
+  }
+
+  .carta-musica h3 {
+    font-size: 0.8rem;
+  }
+
+  .carta-musica p {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 100px;
+  }
+
+  .navbar {
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    margin: 0 0.25rem;
+  }
+
+  .container-principal {
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .perfil-usuario {
+    padding: 0.75rem;
+  }
+
+  .avatar-usuario {
     width: 50px;
     height: 50px;
   }
 
+  .navegacao-principal {
+    gap: 0.5rem;
+  }
+
+  .item-nav {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .conteudo-principal {
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+
+  .conteudo-principal h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .grade-musicas {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .carta-musica {
+    padding: 0.5rem;
+  }
+
+  .carta-musica img {
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .carta-musica h3 {
+    font-size: 0.75rem;
+  }
+
+  .carta-musica p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .container-principal {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .perfil-usuario {
+    padding: 0.6rem;
+  }
+
+  .avatar-usuario {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nome-usuario {
+    font-size: 0.9rem;
+  }
+
+  .status-online {
+    font-size: 0.8rem;
+  }
+
+  .navegacao-principal {
+    gap: 0.4rem;
+  }
+
+  .item-nav {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .item-nav span {
+    display: none;
+  }
+
+  .item-nav i {
+    width: auto;
+  }
+
   .busca-rapida {
-    order: -1;
-    margin-bottom: 1rem;
+    display: none;
+  }
+
+  .secao-playlists .botao-expandir-playlists span {
+    display: none;
+  }
+
+  .secao-amigos .titulo-amigos {
+    display: none;
+  }
+
+  .conteudo-principal {
+    padding: 0.5rem;
+  }
+
+  .conteudo-principal h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .grade-musicas {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 0.3rem;
+  }
+
+  .carta-musica {
+    padding: 0.3rem;
+  }
+
+  .carta-musica img {
+    height: 70px;
+    margin-bottom: 0.3rem;
+  }
+
+  .carta-musica h3 {
+    font-size: 0.7rem;
+  }
+
+  .carta-musica p {
+    font-size: 0.65rem;
   }
 }
