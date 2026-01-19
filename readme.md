@@ -8,4 +8,4 @@ meus feitos ao longo do ano 2026.
 
 29. SpamCap - Analizador de Spams
 11.	Mini e-commerce
-2. Songfy - tipo spotify
+2. [Songfy](https://bybenb.github.io/showcase-2026/2-songfy/src/index.html) - tipo spotify 
