@@ -11,7 +11,7 @@ class GerenciadorNavegacao {
   inicializar() {
     this.configurarMenuMobile();
     this.configurarHeaderNav();
-    this.configurarBotoesTeма();
+    this.configurarBotoesTema();
   }
 
   configurarMenuMobile() {
@@ -46,7 +46,7 @@ class GerenciadorNavegacao {
     });
   }
 
-  configurarBotoesTeма() {
+  configurarBotoesTema() {
     if (this.btnTemaHeader) {
       this.btnTemaHeader.addEventListener('click', () => {
         if (window.gerenciadorTema) {
@@ -92,7 +92,20 @@ class GerenciadorNavegacao {
     });
 
     console.log(`Navegação: ${secao}`);
-    
+
+    // Mapeia seção para rota hash
+    const rota = this.mapSectionToRoute(secao);
+    try {
+      if (window.navigate) {
+        window.navigate(rota.replace(/^#?/, ''));
+      } else {
+        // fallback
+        location.hash = rota.startsWith('#') ? rota : '#/' + rota;
+      }
+    } catch (e) {
+      console.error('Erro ao navegar para rota', e);
+    }
+
     // Armazena no localStorage
     localStorage.setItem('secao-ativa-nav', secao);
   }
@@ -100,7 +113,24 @@ class GerenciadorNavegacao {
   restaurarEstado() {
     const secaoArmazenada = localStorage.getItem('secao-ativa-nav');
     if (secaoArmazenada) {
-      this.ativarNavegacao(secaoArmazenada, null);
+      const rota = this.mapSectionToRoute(secaoArmazenada);
+      if (window.navigate) window.navigate(rota.replace(/^#?/, ''));
+      else location.hash = rota;
+    }
+  }
+
+  mapSectionToRoute(secao) {
+    switch ((secao || '').toLowerCase()) {
+      case 'inicio': return '#/';
+      case 'buscar': return '#/search';
+      case 'biblioteca': return '#/library';
+      case 'playlists': return '#/playlists';
+      case 'estatisticas': return '#/statistics';
+      default:
+        // permite rotas dinâmicas como playlist:1 ou artist:2
+        if (/^playlist:\d+$/.test(secao)) return '#/playlist/' + secao.split(':')[1];
+        if (/^artist:\d+$/.test(secao)) return '#/artist/' + secao.split(':')[1];
+        return '#/';
     }
   }
 }
