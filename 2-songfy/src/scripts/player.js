@@ -255,22 +255,44 @@ class AudioPlayer {
    * Próxima música
    */
   next() {
-    if (this.shuffleMode) {
-      this.queueIndex = Math.floor(Math.random() * this.queue.length);
+    // Se QueueManager está disponível, usar dele
+    if (window.queueManager && window.queueManager.queue.length > 0) {
+      const proximaMusica = window.queueManager.getNextTrack();
+      if (proximaMusica) {
+        this.currentTrack = proximaMusica;
+        this.carregarFila(window.queueManager.queueIndex);
+        if (this.isPlaying) this.play();
+      }
     } else {
-      this.queueIndex = (this.queueIndex + 1) % this.queue.length;
+      // Fallback para o comportamento antigo se QueueManager não estiver disponível
+      if (this.shuffleMode) {
+        this.queueIndex = Math.floor(Math.random() * this.queue.length);
+      } else {
+        this.queueIndex = (this.queueIndex + 1) % this.queue.length;
+      }
+      this.carregarFila(this.queueIndex);
+      if (this.isPlaying) this.play();
     }
-    this.carregarFila(this.queueIndex);
-    if (this.isPlaying) this.play();
   }
 
   /**
    * Música anterior
    */
   previous() {
-    this.queueIndex = this.queueIndex > 0 ? this.queueIndex - 1 : this.queue.length - 1;
-    this.carregarFila(this.queueIndex);
-    if (this.isPlaying) this.play();
+    // Se QueueManager está disponível, usar dele
+    if (window.queueManager && window.queueManager.queue.length > 0) {
+      const musicaAnterior = window.queueManager.getPreviousTrack();
+      if (musicaAnterior) {
+        this.currentTrack = musicaAnterior;
+        this.carregarFila(window.queueManager.queueIndex);
+        if (this.isPlaying) this.play();
+      }
+    } else {
+      // Fallback para o comportamento antigo se QueueManager não estiver disponível
+      this.queueIndex = this.queueIndex > 0 ? this.queueIndex - 1 : this.queue.length - 1;
+      this.carregarFila(this.queueIndex);
+      if (this.isPlaying) this.play();
+    }
   }
 
   /**
@@ -342,6 +364,11 @@ class AudioPlayer {
     
     this.atualizarFavorito();
     this.dispatchEvent('trackChange', { track: this.currentTrack });
+    
+    // Adiciona ao histórico se QueueManager está disponível
+    if (window.queueManager) {
+      window.queueManager.addToHistory(this.currentTrack);
+    }
     
     console.log(`Música carregada: ${this.currentTrack.titulo}`);
   }
@@ -432,9 +459,15 @@ class AudioPlayer {
    * Mostra a fila em um alert/modal
    */
   mostrarFila() {
-    const nomes = this.queue.map((m, i) => `${i + 1}. ${m.titulo} - ${m.artista}`).join('\n');
-    console.log('Fila:\n' + nomes);
-    alert('Fila de reprodução:\n' + nomes);
+    // Se QueueUI está disponível, usar a modal visual
+    if (window.queueUI) {
+      window.queueUI.abrirModalFila();
+    } else {
+      // Fallback para o método antigo (alert com texto)
+      const nomes = this.queue.map((m, i) => `${i + 1}. ${m.titulo} - ${m.artista}`).join('\n');
+      console.log('Fila:\n' + nomes);
+      alert('Fila de reprodução:\n' + nomes);
+    }
   }
 
   /**

@@ -37,13 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`🎵 Tocando: ${musica.titulo}`);
         }
     });
-
     // Quando clica em "Adicionar à fila"
     window.addEventListener('addToQueue', (e) => {
         const musica = e.detail;
         if (window.audioPlayer) {
             window.audioPlayer.addToQueue(musica);
             console.log(`➕ Adicionado à fila: ${musica.titulo}`);
+        }
+        // Também adiciona ao QueueManager se disponível
+        if (window.queueManager) {
+            window.queueManager.addToQueue(musica);
         }
     });
 
@@ -91,6 +94,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================================
     if (window.audioPlayer) {
         console.log('✅ AudioPlayer inicializado');
+    }
+
+    // ========================================
+    // 8. Inicializa QueueManager e QueueUI
+    // ========================================
+    if (window.queueManager) {
+        console.log('✅ QueueManager inicializado');
+        // Sincroniza a fila do AudioPlayer com QueueManager se necessário
+        if (window.audioPlayer && window.audioPlayer.queue.length > 0) {
+            window.queueManager.setQueue(window.audioPlayer.queue, 0);
+            console.log('🔄 Fila sincronizada do AudioPlayer para QueueManager');
+        }
+    }
+
+    if (window.queueUI) {
+        console.log('✅ QueueUI inicializado');
+    }
+
+    // ========================================
+    // 9. Inicializa HistoricoUI
+    // ========================================
+    if (window.historicoUI) {
+        window.historicoUI.inicializar();
+        console.log('✅ HistoricoUI inicializado');
     }
 
     console.log('🎵 Songfy pronto para usar!');

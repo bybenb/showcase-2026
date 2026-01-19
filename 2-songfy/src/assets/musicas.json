@@ -20,7 +20,7 @@
 
 
     {"id": 20, "titulo": "MILES MORALES 🕷️ | Homem-Aranha: Através do Aranhaverso", "artista": "MHRAP", "album": "Trap NERD", "duracao": 214, "genero": "Trap", "arquivo": "../musics/music20.mp3", "thumb": "./image/covers/cover_6.png", "dataAdicao": "2025-10-25", "tocadas": 784},
-    {"id": 21, "titulo": "Peter B Parker 🕷️ | Homem-Aranha: Através do Aranhaverso", "artista": "MHRAP", "album": "Trap NERD", "duracao": 189, "genero": "Trap", "arquivo": "../musics/music21.mp3", "thumb": "./image/covers/cover_2.png", "dataAdicao": "2025-10-22", "tocadas": 11454},
+    {"id": 21, "titulo": "Peter B Parker 🕷️ | Homem-Aranha: Através do Aranhaverso", "artista": "MHRAP", "album": "Trap NERD", "duracao": 189, "genero": "Trap", "arquivo": "../musics/music21.mp3", "thumb": "./image/covers/cover_6.png", "dataAdicao": "2025-10-22", "tocadas": 11454},
     {"id": 22, "titulo": "Tipo Draken 🐉 (Tokyo Revengers)", "artista": "MHRAP", "album": "Trap NERD", "duracao": 233, "genero": "Funk", "arquivo": "../musics/music22.mp3", "thumb": "./image/covers/cover_6.png", "dataAdicao": "2025-10-20", "tocadas": 25673},
     {"id": 23, "titulo": "Anos 80", "artista": "VMZ", "album": "Anos 80", "duracao": 162, "genero": "Pop", "arquivo": "../musics/music23.mp3", "thumb": "./image/covers/cover_8.png", "dataAdicao": "2025-10-18", "tocadas": 72475},
     {"id": 24, "titulo": "Luzes no Céu", "artista": "VMZ", "album": "Retorno", "duracao": 216, "genero": "Soul", "arquivo": "../musics/music24.mp3", "thumb": "./image/covers/cover_8.png", "dataAdicao": "2025-10-15", "tocadas": 71189},

@@ -832,3 +832,154 @@ body {
     font-size: 0.65rem;
   }
 }
+
+/* ========================================
+   HISTÓRICO - ESTILOS NA SIDEBAR
+   ======================================== */
+
+.secao-historico {
+  overflow: hidden;
+}
+
+.botao-expandir-historico {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto);
+  cursor: pointer;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.botao-expandir-historico:hover {
+  color: var(--cor-primaria);
+}
+
+.botao-expandir-historico i {
+  transition: transform 0.3s ease;
+}
+
+.botao-expandir-historico:hover i {
+  transform: scale(1.1);
+}
+
+.lista-historico {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.lista-historico.expandida {
+  max-height: 400px;
+}
+
+.historico-vazio {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  color: var(--cor-texto-secundaria);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.item-historico-sidebar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  list-style: none;
+}
+
+.item-historico-sidebar:hover {
+  background: var(--cor-fundo-secundaria);
+  transform: translateX(4px);
+}
+
+.thumb-historico {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info-historico {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.titulo-historico {
+  font-size: 0.8rem;
+  color: var(--cor-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-weight: 500;
+}
+
+.artista-historico {
+  font-size: 0.7rem;
+  color: var(--cor-texto-secundaria);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.btn-tocar-novamente {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto-secundaria);
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-tocar-novamente:hover {
+  background: var(--cor-primaria);
+  color: white;
+}
+
+.historico-mais {
+  padding: 0.5rem 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--cor-borda);
+  text-align: center;
+  list-style: none;
+}
+
+.historico-mais a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.historico-mais a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
