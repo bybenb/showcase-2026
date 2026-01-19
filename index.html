@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>ShowCase26 • Projetos</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --primary: #22c55e;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #020617, #0f172a);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .project {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid #020617;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border-color: var(--primary);
+    }
+
+    .project h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .project a {
+      text-decoration: none;
+      color: #020617;
+      background: var(--primary);
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    .project a:hover {
+      background: #16a34a;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <header>
+    <h1>ShowCase26</h1>
+    <p>projetos práticos • evolução real • segue a vibe</p>
+  </header>
+
+  <main>
+
+    <!-- 2 -->
+    <div class="project">
+      <h3>Songfy <i class="fas fa-music"></i> </h3>
+      <p>Clone do Spotify com player, playlists e recomendações.</p>
+      <a href="2-songfy/src/index.html">Abrir projeto</a>
+    </div>
+
+
+    <!--  
+    
+    <div class="project">
+      <h3>Mini E-commerce</h3>
+      <p>Catálogo, carrinho e checkout fictício.</p>
+      <a href="projects/ecommerce/">Abrir projeto</a>
+    </div>
+
+   
+    <div class="project">
+      <h3>API de Tarefas</h3>
+      <p>CRUD completo com autenticação.</p>
+      <a href="projects/api-tasks/">Abrir projeto</a>
+    </div>
+
+        <div class="project">
+      <h3>Dashboard de Estatísticas</h3>
+      <p>Visualização de dados usando APIs externas.</p>
+      <a href="#">Abrir projeto</a>
+    </div>
+
+    
+    <div class="project">
+      <h3>Encurtador de Links</h3>
+      <p>Criação e redirecionamento de URLs.</p>
+      <a href="#">Abrir projeto</a>
+    </div>
+     -->
+
+
+  </main>
+
+  <footer>
+    © 2026 • Construído com foco em evolução real
+  </footer>
+
+</body>
+</html>
