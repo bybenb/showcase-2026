@@ -1,0 +1,13 @@
+{
+  "name": "QRStudio",
+  "version": "1.0.0",
+  "description": "Um projeto de estudo para criar QR Codes com JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Beny B. Reis II",
+  "license": "ISC",
+  "type": "commonjs"
+}
