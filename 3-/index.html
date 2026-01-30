@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Studio - Gerador de QR Codes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-qrcode logo"></i> QR Studio</h1>
+            <p>Gere QR Codes personalizados em segundos</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2 class="section-title"><i class="fas fa-edit"></i> Conteúdo do QR Code</h2>
+                
+                <div class="input-group">
+                    <label for="qrContent"><i class="fas fa-link"></i> URL ou Texto</label>
+                    <textarea id="conteudoQR" placeholder="Digite uma URL (ex: https://exemplo.com) ou qualquer texto...">https://instagram.com/bkapa8</textarea>
+                </div>
+
+                <h2 class="section-title"><i class="fas fa-sliders-h"></i> Personalização</h2>
+                
+                <div class="options">
+                    <div class="option">
+                        <label for="qrSize"><i class="fas fa-arrows-alt-v"></i> Tamanho</label>
+                        <select id="tamanhoQR">
+                            <option value="150">150x150</option>
+                            <option value="200" selected>200x200</option>
+                            <option value="250">250x250</option>
+                            <option value="300">300x300</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option">
+                        <label for="qrColor"><i class="fas fa-palette"></i> Cor</label>
+                        <input type="color" id="corQR" value="#6a11cb">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="botaoGerar" class="generate-btn">
+                        <i class="fas fa-bolt"></i> Gerar QR Code
+                    </button>
+                    
+                    <button id="botaoBaixar" class="download-btn" disabled>
+                        <i class="fas fa-download"></i> Baixar QR Code
+                    </button>
+                </div>
+            </section>
+
+            <section class="output-section">
+                <h2 class="section-title"><i class="fas fa-qrcode"></i> Seu QR Code</h2>
+                
+                <div class="qr-container">
+                    <div class="placeholder" id="placeholderQR">
+                        <i class="fas fa-qrcode"></i>
+                        <p>Seu QR Code aparecerá aqui</p>
+                    </div>
+                    <img id="imagemQRCode" alt="QR Code Gerado">
+                    <div class="loading" id="spinnerCarregamento">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                
+                <p class="qr-info">Escaneie este QR Code com a câmera do seu celular</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>QR Studio &copy; <span id="anoAtual">2005</span> - Gerador de QR Codes | Usa a API <a href="https://goqr.me/api/" target="_blank">QRCodeAPI</a></p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notificacao"></div>
+
+    <script src="cerebro.js"></script>
+</body>
+</html>
