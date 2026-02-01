@@ -3,7 +3,7 @@
 **Nível:** Iniciante  
 **Tecnologias:** HTML, JavaScript, 
 **Tempo Estimado:** 1 dia  
-**Créditos Inspiracionais:**  *[MHRAP](https://youtube.com/@MHRAPOFICIAL)*, *[masa](https://ma5a.com)*
+**Créditos Inspiracionais:**  *[MHRAP](https://youtu.be/RpTKDJxCU7k?si=NknTHzIK9Xc0iulA&t=11)*, *[masa](https://ma5a.com)*
 
 
 
