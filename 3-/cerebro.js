@@ -9,7 +9,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const spinnerCarregamento = document.getElementById('spinnerCarregamento');
     const notificacao = document.getElementById('notificacao');
     const anoAtual = document.getElementById('anoAtual');
+    const colorModal = document.getElementById('colorModal');
+    const closeModal = colorModal.querySelector('.close');
+    const colorSwatches = colorModal.querySelectorAll('.color-swatch');
 // ano atual no rodapé
+
+    // Detectar se é mobile
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    // Evento para abrir modal de cor em mobile
+    corQR.addEventListener('click', function(e) {
+        if (isMobile) {
+            e.preventDefault();
+            colorModal.style.display = 'block';
+        }
+    });
+
+    // Fechar modal
+    closeModal.addEventListener('click', () => colorModal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === colorModal) colorModal.style.display = 'none';
+    });
+
+    // Selecionar cor no modal
+    colorSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            corQR.value = swatch.dataset.color;
+            colorModal.style.display = 'none';
+        });
+    });
 
 
     // Gerar QR Code
@@ -60,15 +88,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Baixar QR Code
-    botaoBaixar.addEventListener('click', function() {
+    botaoBaixar.addEventListener('click', async function() {
         if (imagemQRCode.src && !botaoBaixar.disabled) {
-            const linkDownload = document.createElement('a');
-            linkDownload.href = imagemQRCode.src;
-            linkDownload.download = `qr-studio-${Date.now()}.png`;
-            document.body.appendChild(linkDownload);
-            linkDownload.click();
-            document.body.removeChild(linkDownload);
-            mostrarNotificacao('QR Code baixado com sucesso!', 'success');
+            try {
+                const response = await fetch(imagemQRCode.src);
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const linkDownload = document.createElement('a');
+                linkDownload.href = url;
+                linkDownload.download = `qr-studio-${Date.now()}.png`;
+                document.body.appendChild(linkDownload);
+                linkDownload.click();
+                document.body.removeChild(linkDownload);
+                URL.revokeObjectURL(url);
+                mostrarNotificacao('QR Code baixado com sucesso!', 'success');
+            } catch (error) {
+                mostrarNotificacao('Erro ao baixar QR Code.', 'error');
+            }
         }
     });
 
