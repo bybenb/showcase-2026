@@ -9,8 +9,8 @@
 
 #	Projetos
 1	Página de portfólio pessoal responsiva
-2	Clone de layout famoso (Netflix/Spotify)
-3	Gerador de QR Code
+2	Clone de layout famoso (Netflix/Spotify)        |   done
+3	Gerador de QR Code        |   done
 4	Conversor de moedas
 5	To-Do App com localStorage
 6	Mini blog estático com Markdown
