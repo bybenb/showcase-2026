@@ -9,33 +9,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const spinnerCarregamento = document.getElementById('spinnerCarregamento');
     const notificacao = document.getElementById('notificacao');
     const anoAtual = document.getElementById('anoAtual');
-    const colorModal = document.getElementById('colorModal');
-    const closeModal = colorModal.querySelector('.close');
-    const colorSwatches = colorModal.querySelectorAll('.color-swatch');
+    const modalCor = document.getElementById('modalCor');
+    const fecharModal = modalCor.querySelector('.fechar');
+    const amostrasCor = modalCor.querySelectorAll('.amostra-cor');
 // ano atual no rodapé
 
     // Detectar se é mobile
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const ehMobile = window.matchMedia('(max-width: 767px)').matches;
 
     // Evento para abrir modal de cor em mobile
     corQR.addEventListener('click', function(e) {
-        if (isMobile) {
+        if (ehMobile) {
             e.preventDefault();
-            colorModal.style.display = 'block';
+            modalCor.style.display = 'block';
         }
     });
 
     // Fechar modal
-    closeModal.addEventListener('click', () => colorModal.style.display = 'none');
+    fecharModal.addEventListener('click', () => modalCor.style.display = 'none');
     window.addEventListener('click', (e) => {
-        if (e.target === colorModal) colorModal.style.display = 'none';
+        if (e.target === modalCor) modalCor.style.display = 'none';
     });
 
     // Selecionar cor no modal
-    colorSwatches.forEach(swatch => {
-        swatch.addEventListener('click', () => {
-            corQR.value = swatch.dataset.color;
-            colorModal.style.display = 'none';
+    amostrasCor.forEach(amostra => {
+        amostra.addEventListener('click', () => {
+            corQR.value = amostra.dataset.color;
+            modalCor.style.display = 'none';
         });
     });
 

@@ -288,7 +288,7 @@ footer a {
     animation: fadeIn 0.3s ease;
 }
 
-.modal-content {
+.conteudo-modal {
     background-color: white;
     margin: 15% auto;
     padding: 20px;
@@ -298,7 +298,7 @@ footer a {
     text-align: center;
 }
 
-.close {
+.fechar {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -306,11 +306,11 @@ footer a {
     cursor: pointer;
 }
 
-.close:hover {
+.fechar:hover {
     color: black;
 }
 
-.color-options {
+.opcoes-cor {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -318,7 +318,7 @@ footer a {
     margin-top: 20px;
 }
 
-.color-swatch {
+.amostra-cor {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -327,6 +327,38 @@ footer a {
     transition: transform 0.2s;
 }
 
-.color-swatch:hover {
+.amostra-cor:hover {
     transform: scale(1.1);
 }
+
+
+
+
+    .donoDaCoisa  {
+      position: fixed;
+      right: 8px;
+      bottom: 8px;
+
+      font-size: 9px;
+      color: #7f16f0;
+      background: transparent;
+
+      border: .1px solid #6b11cba6;
+      padding: 2px .5em;
+      border-radius: 0.9em;
+      transition: border-color ease-in 0.8s, box-shadow 1.3s;
+      
+    }
+
+    .donoDaCoisa:hover {
+      border-color: #6a11cb;
+      box-shadow: 0.1px .2px 2px #6a11cb;
+
+    }
+    
+    .donoDaCoisa > a  {
+
+
+      color: #c1c4b8;
+      text-decoration: none;
+    }
