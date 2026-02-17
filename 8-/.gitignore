@@ -1,0 +1,12 @@
+node_modules/
+.env.local
+.DS_Store
+npm-debug.log
+coverage/
+logs/
+dist/
+
+
+# Haha! baka... watashi wa baka janai yo! 
+# Kore wa watashi no seikatsu no ichibu da yo!
+.env
