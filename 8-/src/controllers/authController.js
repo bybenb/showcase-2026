@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const { gerarToken } = require('../utils/jwt');
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -18,8 +19,11 @@ const register = async (req, res) => {
         const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
-        // Return success response
-        return res.status(201).json({ name: newUser.name, email: newUser.email });
+        // Generate JWT token
+        const token = gerarToken(newUser._id);
+
+        // Respond with user data and token
+        return res.status(201).json({ user: { id: newUser._id, name: newUser.name, email: newUser.email }, token });
     } catch (error) {
         return res.status(500).json({ message: 'Server error', error });
     }
