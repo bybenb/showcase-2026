@@ -29,4 +29,30 @@ const register = async (req, res) => {
     }
 };
 
-module.exports = { register };
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Find user including password
+        const user = await User.findOne({ email }).select('+password');
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        // Compare password
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        // Generate JWT token
+        const token = gerarToken(user._id);
+
+        // Respond with user data and token
+        return res.status(200).json({ user: { id: user._id, name: user.name, email: user.email }, token });
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = { register, login };
