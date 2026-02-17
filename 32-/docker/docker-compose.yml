@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: sayllingo-postgres
+    environment:
+      POSTGRES_USER: sayllingo
+      POSTGRES_PASSWORD: sayllingo_dev
+      POSTGRES_DB: sayllingo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - sayllingo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sayllingo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: sayllingo-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sayllingo-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MinIO (S3-compatible storage)
+  minio:
+    image: minio/minio:latest
+    container_name: sayllingo-minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin_dev
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/minio_data
+    command: server /minio_data --console-address ":9001"
+    networks:
+      - sayllingo-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Ollama with Llama 3
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sayllingo-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+    networks:
+      - sayllingo-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: sayllingo-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://sayllingo:sayllingo_dev@postgres:5432/sayllingo_db
+      REDIS_URL: redis://redis:6379
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin_dev
+      OLLAMA_BASE_URL: http://ollama:11434
+      ENVIRONMENT: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ../backend:/app
+    networks:
+      - sayllingo-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Apache Airflow (Webserver)
+  airflow-webserver:
+    build:
+      context: ../airflow
+      dockerfile: Dockerfile
+    container_name: sayllingo-airflow-webserver
+    environment:
+      AIRFLOW_HOME: /home/airflow
+      AIRFLOW__CORE__DAGS_FOLDER: /home/airflow/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql://sayllingo:sayllingo_dev@postgres:5432/sayllingo_airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ../airflow/dags:/home/airflow/dags
+      - ../airflow/plugins:/home/airflow/plugins
+    networks:
+      - sayllingo-network
+    command: airflow webserver
+
+  # Apache Airflow (Scheduler)
+  airflow-scheduler:
+    build:
+      context: ../airflow
+      dockerfile: Dockerfile
+    container_name: sayllingo-airflow-scheduler
+    environment:
+      AIRFLOW_HOME: /home/airflow
+      AIRFLOW__CORE__DAGS_FOLDER: /home/airflow/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql://sayllingo:sayllingo_dev@postgres:5432/sayllingo_airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ../airflow/dags:/home/airflow/dags
+      - ../airflow/plugins:/home/airflow/plugins
+    networks:
+      - sayllingo-network
+    command: airflow scheduler
+
+volumes:
+  postgres_data:
+  minio_data:
+  ollama_models:
+
+networks:
+  sayllingo-network:
+    driver: bridge
