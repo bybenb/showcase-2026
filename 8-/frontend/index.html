@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Inicial - Showcase</title>
+  <script>
+    // Verifica se o usuário está logado
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
+    } else {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

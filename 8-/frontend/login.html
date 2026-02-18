@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Showcase</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(80, 80, 160, 0.2);
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      margin-bottom: 24px;
+      color: #6a11cb;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .form-group {
+      width: 100%;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d1d1;
+      font-size: 15px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus {
+      border-color: #6a11cb;
+    }
+    .error {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(80, 80, 160, 0.15);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .link {
+      margin-top: 18px;
+      color: #2575fc;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .link:hover {
+      color: #6a11cb;
+      text-decoration: underline;
+    }
+    .links {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .success {
+      color: #27ae60;
+      font-size: 15px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Login</h2>
+    <div id="successMsg" class="success" style="display:none;"></div>
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <div class="error" id="emailError"></div>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" required>
+        <div class="error" id="passwordError"></div>
+      </div>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+    <div class="links">
+      <a href="register.html" class="link">Não tem conta? Registre-se</a>
+      <a href="#" class="link">Esqueceu a senha?</a>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      emailError.textContent = '';
+      passwordError.textContent = '';
+      successMsg.style.display = 'none';
+
+      // Basic validation
+      let valid = true;
+      if (!emailInput.value.trim()) {
+        emailError.textContent = 'Informe seu email.';
+        valid = false;
+      }
+      if (!passwordInput.value.trim()) {
+        passwordError.textContent = 'Informe sua senha.';
+        valid = false;
+      }
+      if (!valid) return;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: emailInput.value,
+            password: passwordInput.value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          if (data && data.message) {
+            passwordError.textContent = data.message;
+          } else {
+            passwordError.textContent = 'Credenciais inválidas.';
+          }
+        } else {
+          // Armazena o token JWT
+          localStorage.setItem('token', data.token);
+          successMsg.textContent = 'Login realizado com sucesso! Redirecionando...';
+          successMsg.style.display = 'block';
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        }
+      } catch (err) {
+        passwordError.textContent = 'Erro de conexão. Tente novamente.';
+      }
+    });
+  </script>
+</body>
+</html>
