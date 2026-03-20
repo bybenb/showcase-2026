@@ -43,10 +43,13 @@ songfy
 - Access your music library and create playlists from the sidebar.
 - Monitor your listening statistics in the Estatísticas section.
 
-## Contributing
-Contributions are welcome! Please submit a pull request or open an issue for any suggestions or improvements.
+## License
 
-## Author
-- [Beny B Reis](https://www.instagram.com/bkapa8/)
-- [isbenyreis@gmail.com](mailto:isbenyreis@gmail.com)
+Copyright (c) 2026-present Beny Basawulo Kiamvu. All rights reserved.       
+
+The code, design and articles in this repository are intellectual property of the individual mentioned above (unless otherwise stated) and as such CANNOT be copied, modified, sublicensed or redistributed without permission from the author.
+
+- [Beny B Reis](https://www.instagram.com/bkapa8/)        
+- [isbenyreis@gmail.com](mailto:isbenyreis@gmail.com)        
+- **Créditos Inspiracionais**: [MHRap](https://www.youtube.com/watch?v=zhUriVbQ6z4&t=43s),  [masa](https://ma5a.com/)    
 
