@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Blog Estático | Markdown</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef3 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* header */
+        .blog-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .blog-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .blog-header p {
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* grid de posts */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .post-content-preview {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-excerpt {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* modal para visualizar post completo */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 1.5rem;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #64748b;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #ef4444;
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        /* estilo para markdown renderizado */
+        .markdown-body {
+            font-size: 1rem;
+            color: #1e293b;
+        }
+
+        .markdown-body h1 {
+            font-size: 2rem;
+            margin: 1rem 0 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.3rem;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.6rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .markdown-body h3 {
+            font-size: 1.3rem;
+            margin: 0.8rem 0;
+        }
+
+        .markdown-body p {
+            margin: 0.8rem 0;
+            line-height: 1.7;
+        }
+
+        .markdown-body code {
+            background: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .markdown-body pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .markdown-body pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .markdown-body blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            color: #475569;
+            font-style: italic;
+        }
+
+        .markdown-body ul, .markdown-body ol {
+            margin: 0.5rem 0 0.5rem 1.5rem;
+        }
+
+        .markdown-body img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            border-top: 1px solid #cbd5e1;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+            .modal-content {
+                max-height: 90vh;
+            }
+        }
+    </style>
+    <!-- Markdown parsing library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<header class="blog-header">
+    <h1>📝 Mini Blog Markdown</h1>
+    <p>Posts estáticos escritos em Markdown · manipulação de dados com JavaScript puro</p>
+</header>
+
+<div class="container">
+    <div class="posts-grid" id="postsGrid"></div>
+</div>
+
+<footer>
+    <p>✍️ Blog estático com Markdown | Dados simulados + renderização dinâmica</p>
+</footer>
+
+<!-- Modal para visualização do post completo -->
+<div id="postModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="modalMarkdownContent" class="markdown-body"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // BASE DE DADOS SIMULADA (posts em Markdown)
+    // Cada post tem: id, título, data, miniatura (emoji/imagem), excerpt e o conteúdo em markdown
+    // ============================================================
+    const posts = [
+        {
+            id: 1,
+            title: "Primeiros passos com Markdown 🚀",
+            date: "15 de Maio, 2024",
+            imageIcon: "📝",
+            excerpt: "Markdown é uma linguagem de marcação leve que você vai adorar. Aprenda os básicos em minutos...",
+            markdown: `# Primeiros passos com Markdown
+
+Markdown foi criado por **John Gruber** em 2004 e se tornou padrão para documentação.
+
+## Por que usar Markdown?
+
+- ✅ Simples e rápido
+- ✅ Legível mesmo em texto puro
+- ✅ Convertível para HTML, PDF e outros
+
+### Exemplo de código
+
+\`\`\`javascript
+// Isso é um bloco de código
+function saudacao(nome) {
+    return \`Olá, \${nome}!\`;
+}
+console.log(saudacao("Dev"));
+\`\`\`
+
+> "A simplicidade é o último grau de sofisticação." — Leonardo da Vinci
+
+**Comece hoje mesmo** a escrever seus posts com Markdown! 🎉`
+        },
+        {
+            id: 2,
+            title: "JavaScript: Manipulação de Dados Poderosa",
+            date: "20 de Maio, 2024",
+            imageIcon: "🛠️",
+            excerpt: "Arrays, objetos, map, filter, reduce — transforme dados como um profissional...",
+            markdown: `# Manipulação de Dados em JS
+
+JavaScript oferece métodos incríveis para lidar com coleções.
+
+## Map, Filter e Reduce
+
+### 1. **Map** - transforma cada elemento
+\`\`\`js
+const numeros = [1, 2, 3, 4];
+const dobrados = numeros.map(n => n * 2);
+// Resultado: [2, 4, 6, 8]
+\`\`\`
+
+### 2. **Filter** - filtra elementos
+\`\`\`js
+const pares = numeros.filter(n => n % 2 === 0);
+// [2, 4]
+\`\`\`
+
+### 3. **Reduce** - acumula valores
+\`\`\`js
+const soma = numeros.reduce((acc, n) => acc + n, 0);
+// 10
+\`\`\`
+
+## Manipulação de arrays é essencial para qualquer **front-end moderno**!`
+        },
+        {
+            id: 3,
+            title: "CSS Grid vs Flexbox — Qual usar?",
+            date: "25 de Maio, 2024",
+            imageIcon: "🎨",
+            excerpt: "Duas ferramentas incríveis para layouts. Aprenda quando cada uma brilha...",
+            markdown: `# Grid vs Flexbox
+
+Ambos são **fantásticos**, mas servem para propósitos diferentes.
+
+## Flexbox: 1D (linha ou coluna)
+
+- Ideal para componentes menores
+- Alinhamento e distribuição de espaço
+- Ex: cards, navbars, listas
+
+## Grid: 2D (linhas E colunas)
+
+- Layouts completos da página
+- Controle total sobre linhas e colunas
+- Ex: galerias, dashboards, páginas complexas
+
+### Exemplo prático de Grid:
+
+\`\`\`css
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+\`\`\`
+
+**Dica:** Nenhum é melhor, depende do contexto! Combine os dois para resultados incríveis. ✨`
+        },
+        {
+            id: 4,
+            title: "Construindo um Blog Estático com Markdown",
+            date: "28 de Maio, 2024",
+            imageIcon: "📂",
+            excerpt: "Crie blogs rápidos e leves sem backend. Apenas HTML, JS e Markdown!",
+            markdown: `# Blog Estático: Simplicidade e Velocidade
+
+Este blog que você está vendo agora é **100% estático** e não precisa de banco de dados!
+
+## Como funciona?
+
+1. Os posts são armazenados num array JavaScript (simulando dados)
+2. Cada post contém markdown puro
+3. A biblioteca **Marked** converte markdown para HTML na hora
+
+### Vantagens:
+
+- ⚡ Carregamento instantâneo
+- 🔒 Seguro (sem backend vulnerável)
+- 💰 Custo zero para hospedar (GitHub Pages, Netlify, etc)
+- 🧩 Fácil de personalizar
+
+### Possibilidade de evolução:
+
+No futuro você pode:
+- Buscar posts de um arquivo \`.md\` externo
+- Adicionar editor de markdown para criar posts
+- Usar localStorage para salvar rascunhos
+
+A **manipulação de dados** com JavaScript torna tudo isso possível! 🚀`
+        }
+    ];
+
+    // Função para renderizar os cards na grid
+    function renderPosts() {
+        const grid = document.getElementById('postsGrid');
+        if (!grid) return;
+
+        if (posts.length === 0) {
+            grid.innerHTML = '<div class="no-posts">📭 Nenhum post encontrado. Volte em breve!</div>';
+            return;
+        }
+
+        let html = '';
+        for (const post of posts) {
+            html += `
+                <div class="post-card" data-id="${post.id}">
+                    <div class="post-image">${post.imageIcon}</div>
+                    <div class="post-content-preview">
+                        <h3 class="post-title">${escapeHtml(post.title)}</h3>
+                        <div class="post-meta">
+                            <span>📅 ${post.date}</span>
+                            <span>⏱️ 3 min leitura</span>
+                        </div>
+                        <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+                        <div class="read-more">📖 Ler artigo completo →</div>
+                    </div>
+                </div>
+            `;
+        }
+        grid.innerHTML = html;
+
+        // Adicionar evento de clique para cada card
+        document.querySelectorAll('.post-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const postId = parseInt(card.getAttribute('data-id'));
+                const post = posts.find(p => p.id === postId);
+                if (post) {
+                    openModal(post);
+                }
+            });
+        });
+    }
+
+    // Função para abrir modal e renderizar markdown
+    function openModal(post) {
+        const modal = document.getElementById('postModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalMarkdownContent');
+
+        modalTitle.textContent = post.title;
+        
+        // Converte markdown para HTML usando a biblioteca 'marked'
+        // Configuração simples para renderizar de forma segura
+        if (typeof marked !== 'undefined') {
+            // Configurar marked para opções seguras
+            marked.setOptions({
+                breaks: true,
+                gfm: true
+            });
+            const htmlContent = marked.parse(post.markdown);
+            modalContent.innerHTML = htmlContent;
+        } else {
+            // Fallback caso marked não carregue
+            modalContent.innerHTML = `<pre>${escapeHtml(post.markdown)}</pre><p>⚠️ Biblioteca Markdown não carregou, mas o texto está aqui.</p>`;
+        }
+
+        modal.classList.add('active');
+    }
+
+    // Função auxiliar para escapar HTML (evitar XSS nos títulos/excerpts)
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Fechar modal
+    function closeModal() {
+        const modal = document.getElementById('postModal');
+        modal.classList.remove('active');
+    }
+
+    // Eventos de fechamento do modal
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('postModal');
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Tecla ESC fecha modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('postModal');
+            if (modal.classList.contains('active')) {
+                closeModal();
+            }
+        }
+    });
+
+    // Inicializar o blog
+    renderPosts();
+</script>
+</body>
+</html>

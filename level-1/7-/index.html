@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio Mundial | Fusos Horários</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b1120 0%, #111827 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(2px);
+            border-radius: 3rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0E7FF, #A5B4FC);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #9CA3AF;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            border-bottom: 1px dashed #2d3a5e;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        /* cards grid */
+        .clocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .clock-card {
+            background: rgba(18, 25, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 172, 255, 0.4);
+            background: rgba(25, 35, 60, 0.8);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .city-name {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #F0F3FF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .city-name span:first-child {
+            font-size: 1.9rem;
+        }
+
+        .timezone {
+            font-size: 0.8rem;
+            color: #9aa8c9;
+            background: #1e2a44;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        .digital-clock {
+            font-size: 2.6rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            letter-spacing: 2px;
+            background: #00000030;
+            padding: 0.5rem 0.8rem;
+            border-radius: 1.2rem;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            color: #D9E6FF;
+            text-shadow: 0 0 4px #3b82f6;
+            margin: 0.5rem 0;
+        }
+
+        .date-info {
+            font-size: 0.85rem;
+            color: #9CB4E6;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #2a3a5a;
+            padding-top: 10px;
+        }
+
+        .offset-badge {
+            font-family: monospace;
+            background: #0f172a;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6C7A9E;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .digital-clock {
+                font-size: 2rem;
+            }
+            .city-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🌍 RELÓGIO MUNDIAL</h1>
+    <div style="text-align: center;">
+        <div class="sub">⏱️ fusos horários · tempo real</div>
+    </div>
+
+    <div class="clocks-grid" id="clocksContainer"></div>
+    <div class="footer-note">
+        ✨ Atualização automática a cada segundo | Baseado no horário UTC + offset local
+    </div>
+</div>
+
+<script>
+    // Lista de fusos personalizada com nome da cidade, região e offset relativo ao UTC
+    // Usamos offsets fixos para demonstrar mundial (evita depender de timezone do sistema mas ainda baseado no UTC real)
+    // O relógio utiliza a hora UTC atual + offset em horas para gerar a hora exata de cada local.
+    const cities = [
+        { name: "🇺🇸 Nova York", zoneId: "America/New_York", offset: -4, displayOffset: "UTC-4 (EDT)" },
+        { name: "🇧🇷 São Paulo", zoneId: "America/Sao_Paulo", offset: -3, displayOffset: "UTC-3" },
+        { name: "🇵🇹 Lisboa", zoneId: "Europe/Lisbon", offset: 1, displayOffset: "UTC+1 (WEST)" },
+        { name: "🇬🇧 Londres", zoneId: "Europe/London", offset: 1, displayOffset: "UTC+1 (BST)" },
+        { name: "🇫🇷 Paris", zoneId: "Europe/Paris", offset: 2, displayOffset: "UTC+2 (CEST)" },
+        { name: "🇯🇵 Tóquio", zoneId: "Asia/Tokyo", offset: 9, displayOffset: "UTC+9 (JST)" },
+        { name: "🇦🇪 Dubai", zoneId: "Asia/Dubai", offset: 4, displayOffset: "UTC+4" },
+        { name: "🇮🇳 Mumbai", zoneId: "Asia/Kolkata", offset: 5.5, displayOffset: "UTC+5:30" },
+        { name: "🇦🇺 Sydney", zoneId: "Australia/Sydney", offset: 10, displayOffset: "UTC+10 (AEST)" },
+        { name: "🇺🇸 Los Angeles", zoneId: "America/Los_Angeles", offset: -7, displayOffset: "UTC-7 (PDT)" }
+    ];
+
+    // Função principal que obtém UTC atual e aplica offset para cada cidade
+    function updateAllClocks() {
+        const container = document.getElementById("clocksContainer");
+        if (!container) return;
+
+        // Obtemos a data/hora UTC atual como referência universal (milissegundos desde época)
+        const nowUtc = new Date(); 
+        // Converte para timestamp UTC puro (sem influência do timezone local do navegador)
+        // new Date() retorna data no timezone local, mas internamente guarda UTC.
+        // Para calcular corretamente qualquer offset, usamos getTime() que retorna ms desde 1970-01-01 UTC.
+        const utcTimeMs = nowUtc.getTime();
+
+        let cardsHtml = "";
+
+        for (const city of cities) {
+            // Offset em horas (pode ser quebrado ex: 5.5)
+            const offsetHours = city.offset;
+            const offsetMs = offsetHours * 60 * 60 * 1000;
+            const localTimeMs = utcTimeMs + offsetMs;
+            const localDate = new Date(localTimeMs);
+
+            // Formatação da hora 24h
+            let hours = localDate.getUTCHours();
+            let minutes = localDate.getUTCMinutes();
+            let seconds = localDate.getUTCSeconds();
+
+            // Ajuste para formato 2 dígitos
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Formatação da data local (dia/mês/ano)
+            const day = localDate.getUTCDate();
+            const month = localDate.getUTCMonth() + 1;
+            const year = localDate.getUTCFullYear();
+            const weekdays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+            const weekdayIndex = localDate.getUTCDay();
+            const weekdayName = weekdays[weekdayIndex];
+            
+            const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+            
+            // Ícone simples baseado na região (pequeno toque visual)
+            let icon = "🌆";
+            if (city.name.includes("Nova York") || city.name.includes("Los Angeles")) icon = "🗽";
+            else if (city.name.includes("São Paulo")) icon = "🇧🇷";
+            else if (city.name.includes("Lisboa")) icon = "🇵🇹";
+            else if (city.name.includes("Londres")) icon = "🇬🇧";
+            else if (city.name.includes("Paris")) icon = "🇫🇷";
+            else if (city.name.includes("Tóquio")) icon = "🗼";
+            else if (city.name.includes("Dubai")) icon = "🏙️";
+            else if (city.name.includes("Mumbai")) icon = "🕌";
+            else if (city.name.includes("Sydney")) icon = "🏄";
+            else icon = "🌍";
+            
+            cardsHtml += `
+                <div class="clock-card">
+                    <div class="city-name">
+                        <span>${icon}</span>
+                        <span>${city.name}</span>
+                    </div>
+                    <div class="timezone">${city.displayOffset}</div>
+                    <div class="digital-clock">${formattedTime}</div>
+                    <div class="date-info">
+                        <span>📅 ${formattedDate}</span>
+                        <span>📆 ${weekdayName}</span>
+                        <span class="offset-badge">GMT${city.offset >= 0 ? `+${city.offset}` : `${city.offset}`}</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        container.innerHTML = cardsHtml;
+    }
+
+    // Inicializa imediatamente e configura atualização a cada 1 segundo (1000ms)
+    updateAllClocks();
+    setInterval(updateAllClocks, 1000);
+
+    // Adiciona pequeno detalhe para garantir que ao carregar página não haja flickering
+    window.addEventListener('load', () => {
+        updateAllClocks();
+    });
+</script>
+</body>
+</html>
