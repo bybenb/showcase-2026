@@ -22,7 +22,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 // Middleware de autenticação e logging
 bot.use(async (ctx, next) => {
     const startTime = Date.now();
-    
     try {
         // Registrar usuário
         if (ctx.from) {
@@ -33,16 +32,13 @@ bot.use(async (ctx, next) => {
                 ctx.from.last_name || null
             );
             
-            // Verificar se está banido
             const isBanned = await database.isUserBanned(ctx.from.id);
             if (isBanned) {
-                await ctx.reply('🚫 Você foi banido deste bot.');
+                await ctx.reply('Você foi banido deste bot.');
                 return;
             }
         }
-        
         await next();
-        
         // Log da requisição
         const duration = Date.now() - startTime;
         console.log(`[${new Date().toISOString()}] ${ctx.from?.username || 'anon'} - ${ctx.message?.text || ctx.updateType} - ${duration}ms`);
