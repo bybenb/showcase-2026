@@ -136,6 +136,148 @@ class Database {
         return result.rows;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Adicionar ao arquivo database.js existente
+
+    // Registrar download de vídeo
+    async registerVideoDownload(userId, url, title, platform, filename, fileSize, fileType, duration, quality, format, status = 'pending') {
+        const query = `
+            INSERT INTO video_downloads (user_id, url, title, platform, filename, file_size, file_type, duration, quality, format, status)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            RETURNING *
+        `;
+        
+        const values = [userId, url, title, platform, filename, fileSize, fileType, duration, quality, format, status];
+        const result = await this.pool.query(query, values);
+        return result.rows[0];
+    }
+
+    // Atualizar status do download de vídeo
+    async updateVideoDownloadStatus(downloadId, status, errorMessage = null) {
+        const query = `
+            UPDATE video_downloads 
+            SET status = $1, 
+                error_message = $2,
+                downloaded_at = CURRENT_TIMESTAMP
+            WHERE id = $3
+            RETURNING *
+        `;
+        
+        const values = [status, errorMessage, downloadId];
+        const result = await this.pool.query(query, values);
+        return result.rows[0];
+    }
+
+    // Obter histórico de downloads de vídeo do usuário
+    async getUserVideoHistory(telegramId, limit = 10) {
+        const query = `
+            SELECT vd.*, u.username, u.first_name
+            FROM video_downloads vd
+            JOIN users u ON vd.user_id = u.id
+            WHERE u.telegram_id = $1
+            ORDER BY vd.downloaded_at DESC
+            LIMIT $2
+        `;
+        
+        const result = await this.pool.query(query, [telegramId, limit]);
+        return result.rows;
+    }
+
+    // Adicionar à fila de download
+    async addToQueue(userId, url, type = 'video', options = {}) {
+        const query = `
+            INSERT INTO download_queue (user_id, url, type, options, status, priority)
+            VALUES ($1, $2, $3, $4, 'queued', 0)
+            RETURNING *
+        `;
+        
+        const result = await this.pool.query(query, [userId, url, type, options]);
+        return result.rows[0];
+    }
+
+    // Obter próximo da fila
+    async getNextFromQueue() {
+        const query = `
+            SELECT * FROM download_queue
+            WHERE status = 'queued'
+            ORDER BY priority DESC, created_at ASC
+            LIMIT 1
+        `;
+        
+        const result = await this.pool.query(query);
+        return result.rows[0] || null;
+    }
+
+    // Atualizar status da fila
+    async updateQueueStatus(queueId, status, startedAt = null, completedAt = null) {
+        const query = `
+            UPDATE download_queue 
+            SET status = $1,
+                started_at = COALESCE($2, started_at),
+                completed_at = COALESCE($3, completed_at)
+            WHERE id = $4
+            RETURNING *
+        `;
+        
+        const values = [status, startedAt, completedAt, queueId];
+        const result = await this.pool.query(query, values);
+        return result.rows[0];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Limpar downloads antigos (30 dias)
     async cleanOldDownloads(days = 30) {
         const query = `
