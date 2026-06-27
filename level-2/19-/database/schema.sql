@@ -39,49 +39,6 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 
 
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_user_id') THEN
-        CREATE INDEX idx_downloads_user_id ON downloads(user_id);
-    END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_status') THEN
-        CREATE INDEX idx_downloads_status ON downloads(status);
-    END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_downloaded_at') THEN
-        CREATE INDEX idx_downloads_downloaded_at ON downloads(downloaded_at);
-    END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_users_telegram_id') THEN
-        CREATE INDEX idx_users_telegram_id ON users(telegram_id);
-    END IF;
-END;
-$$;
-
-
-CREATE OR REPLACE FUNCTION update_stats()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'INSERT' AND NEW.status = 'completed' THEN
-        UPDATE stats 
-        SET total_downloads = total_downloads + 1,
-            total_size_bytes = total_size_bytes + COALESCE(NEW.file_size, 0),
-            updated_at = CURRENT_TIMESTAMP;
-    ELSIF TG_OP = 'INSERT' AND NEW.status = 'failed' THEN
-        UPDATE stats 
-        SET total_failed = total_failed + 1,
-            updated_at = CURRENT_TIMESTAMP;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER update_stats_trigger
-AFTER INSERT ON downloads
-FOR EACH ROW
-EXECUTE FUNCTION update_stats();
-
-INSERT INTO stats (total_downloads, total_failed, total_size_bytes)
-SELECT 0, 0, 0
-WHERE NOT EXISTS (SELECT 1 FROM stats);
 
 
 
@@ -121,7 +78,77 @@ CREATE TABLE IF NOT EXISTS download_queue (
 );
 
 
-CREATE INDEX idx_video_downloads_user_id ON video_downloads(user_id);
-CREATE INDEX idx_video_downloads_status ON video_downloads(status);
-CREATE INDEX idx_download_queue_user_id ON download_queue(user_id);
-CREATE INDEX idx_download_queue_status ON download_queue(status);
+
+
+
+
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_user_id') THEN
+        CREATE INDEX idx_downloads_user_id ON downloads(user_id);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_status') THEN
+        CREATE INDEX idx_downloads_status ON downloads(status);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_downloads_downloaded_at') THEN
+        CREATE INDEX idx_downloads_downloaded_at ON downloads(downloaded_at);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_users_telegram_id') THEN
+        CREATE INDEX idx_users_telegram_id ON users(telegram_id);
+    END IF;
+
+
+
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_video_downloads_user_id') THEN
+        CREATE INDEX idx_video_downloads_user_id ON video_downloads(user_id);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_video_downloads_status') THEN
+        CREATE INDEX idx_video_downloads_status ON video_downloads(status);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_download_queue_user_id') THEN
+        CREATE INDEX idx_download_queue_user_id ON download_queue(user_id);
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'idx_download_queue_status') THEN
+        CREATE INDEX idx_download_queue_status ON download_queue(status);
+    END IF;
+
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION update_stats()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' AND NEW.status = 'completed' THEN
+        UPDATE stats 
+        SET total_downloads = total_downloads + 1,
+            total_size_bytes = total_size_bytes + COALESCE(NEW.file_size, 0),
+            updated_at = CURRENT_TIMESTAMP;
+    ELSIF TG_OP = 'INSERT' AND NEW.status = 'failed' THEN
+        UPDATE stats 
+        SET total_failed = total_failed + 1,
+            updated_at = CURRENT_TIMESTAMP;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER update_stats_trigger
+    AFTER INSERT ON downloads
+    FOR EACH ROW
+    EXECUTE FUNCTION update_stats();
+
+
+INSERT INTO stats (total_downloads, total_failed, total_size_bytes)
+    SELECT 0, 0, 0
+    WHERE NOT EXISTS (SELECT 1 FROM stats);
+
+
+
+-- CREATE INDEX idx_video_downloads_user_id ON video_downloads(user_id);
+-- CREATE INDEX idx_video_downloads_status ON video_downloads(status);
+-- CREATE INDEX idx_download_queue_user_id ON download_queue(user_id);
+-- CREATE INDEX idx_download_queue_status ON download_queue(status);

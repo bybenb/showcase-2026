@@ -17,7 +17,7 @@ if (!process.env.BOT_TOKEN) {
 }
 
 if (!process.env.DATABASE_URL) {
-    logger.error('❌ DATABASE_URL não definido no .env');
+    logger.error(' DATABASE_URL não definido no .env');
     process.exit(1);
 }
 
