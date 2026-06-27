@@ -20,7 +20,7 @@ class Database {
         try {
             // Criar tabelas se não existirem
             const schema = fs.readFileSync(
-                path.join(__dirname, '../database/schema.sql'),
+                path.join(__dirname, '../database/neon.sql'),
                 'utf8'
             );
             
