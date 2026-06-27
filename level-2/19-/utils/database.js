@@ -20,17 +20,17 @@ class Database {
         try {
             // Criar tabelas se não existirem
             const schema = fs.readFileSync(
-                path.join(__dirname, '../database/neon.sql'),
+                path.join(__dirname, '../database/schema.sql'),
                 'utf8'
             );
-            
+
             // Dividir em comandos individuais
             const commands = schema.split(';').filter(cmd => cmd.trim());
-            
+
             for (const command of commands) {
                 await this.pool.query(command);
             }
-            
+
             console.log('✅ Banco de dados inicializado com sucesso!');
         } catch (error) {
             console.error('❌ Erro ao inicializar banco:', error);
@@ -52,7 +52,7 @@ class Database {
                 total_downloads = users.total_downloads + 1
             RETURNING *
         `;
-        
+
         const values = [telegramId, username, firstName, lastName];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -65,7 +65,7 @@ class Database {
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
         `;
-        
+
         const values = [userId, url, filename, fileSize, fileType, status, errorMessage];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -81,7 +81,7 @@ class Database {
             WHERE id = $3
             RETURNING *
         `;
-        
+
         const values = [status, errorMessage, downloadId];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -92,6 +92,32 @@ class Database {
         const query = 'SELECT * FROM users WHERE telegram_id = $1';
         const result = await this.pool.query(query, [telegramId]);
         return result.rows[0] || null;
+    }
+
+    // Obter usuário por ID interno do BD
+    async getUserById(userId) {
+        const query = 'SELECT * FROM users WHERE id = $1';
+        const result = await this.pool.query(query, [userId]);
+        return result.rows[0] || null;
+    }
+
+    // Verificar se usuário é um administrador
+    async isAdmin(telegramId) {
+        const adminEnvIds = process.env.ADMIN_IDS ?
+            process.env.ADMIN_IDS.split(',').map(id => parseInt(id.trim())) :
+            [];
+        if (adminEnvIds.includes(telegramId)) {
+            return true;
+        }
+
+        try {
+            const query = 'SELECT 1 FROM admins WHERE telegram_id = $1';
+            const result = await this.pool.query(query, [telegramId]);
+            return result.rows.length > 0;
+        } catch (error) {
+            console.error('Erro ao verificar administrador no BD:', error);
+            return false;
+        }
     }
 
     // Verificar se usuário está banido
@@ -110,7 +136,7 @@ class Database {
             ORDER BY d.downloaded_at DESC
             LIMIT $2
         `;
-        
+
         const result = await this.pool.query(query, [telegramId, limit]);
         return result.rows;
     }
@@ -131,7 +157,7 @@ class Database {
             ORDER BY total_downloads DESC
             LIMIT $1
         `;
-        
+
         const result = await this.pool.query(query, [limit]);
         return result.rows;
     }
@@ -161,7 +187,7 @@ class Database {
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING *
         `;
-        
+
         const values = [userId, url, title, platform, filename, fileSize, fileType, duration, quality, format, status];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -177,7 +203,7 @@ class Database {
             WHERE id = $3
             RETURNING *
         `;
-        
+
         const values = [status, errorMessage, downloadId];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -193,7 +219,7 @@ class Database {
             ORDER BY vd.downloaded_at DESC
             LIMIT $2
         `;
-        
+
         const result = await this.pool.query(query, [telegramId, limit]);
         return result.rows;
     }
@@ -205,7 +231,7 @@ class Database {
             VALUES ($1, $2, $3, $4, 'queued', 0)
             RETURNING *
         `;
-        
+
         const result = await this.pool.query(query, [userId, url, type, options]);
         return result.rows[0];
     }
@@ -218,7 +244,7 @@ class Database {
             ORDER BY priority DESC, created_at ASC
             LIMIT 1
         `;
-        
+
         const result = await this.pool.query(query);
         return result.rows[0] || null;
     }
@@ -233,7 +259,7 @@ class Database {
             WHERE id = $4
             RETURNING *
         `;
-        
+
         const values = [status, startedAt, completedAt, queueId];
         const result = await this.pool.query(query, values);
         return result.rows[0];
@@ -280,13 +306,28 @@ class Database {
 
     // Limpar downloads antigos (30 dias)
     async cleanOldDownloads(days = 30) {
-        const query = `
+        // Limpar downloads normais
+        const queryDownloads = `
             DELETE FROM downloads 
             WHERE downloaded_at < NOW() - INTERVAL '${days} days'
-            AND status = 'completed'
         `;
-        const result = await this.pool.query(query);
-        return result.rowCount;
+        // Limpar downloads de vídeo
+        const queryVideoDownloads = `
+            DELETE FROM video_downloads
+            WHERE downloaded_at < NOW() - INTERVAL '${days} days'
+        `;
+        // Limpar fila de downloads resolvida
+        const queryQueue = `
+            DELETE FROM download_queue
+            WHERE completed_at < NOW() - INTERVAL '${days} days'
+            OR (status = 'failed' AND created_at < NOW() - INTERVAL '${days} days')
+        `;
+
+        const res1 = await this.pool.query(queryDownloads);
+        const res2 = await this.pool.query(queryVideoDownloads);
+        await this.pool.query(queryQueue);
+
+        return (res1.rowCount || 0) + (res2.rowCount || 0);
     }
 
     async close() {
